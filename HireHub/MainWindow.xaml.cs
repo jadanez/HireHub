@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HireHub.JobSeekers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,13 @@ namespace HireHub
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            SignUpForm signUpForm = new SignUpForm();
+            this.Visibility = Visibility.Hidden;
+            signUpForm.Show();
         }
     }
 }
