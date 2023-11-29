@@ -1,6 +1,9 @@
-﻿using HireHub.JobSeekers.Models;
+﻿using HireHub.Common;
+using HireHub.Database.Repository.JobSeeker;
+using HireHub.JobSeekers.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,13 +30,89 @@ namespace HireHub.JobSeekers
 
         private void SignUpBtn_Click(object sender, RoutedEventArgs e)
         {
-            SignUpModel signUpModel = GetAllFieldValues();
+            FormErrorMessages formErrorMessages = GetAllFieldValues();
+            if (formErrorMessages != null)
+            {
+                if (formErrorMessages.isFormValid)
+                {
+                    JobSeekerRepository jobSeekerRepository = new JobSeekerRepository();
+                    SignUpModel signUpModel = new SignUpModel()
+                    {
+                        Email = EmailTxtBox.Text,
+                        FirstName = FirstNameTxtBox.Text,
+                        LastName = LastNameTxtBox.Text,
+                        Phone = PhoneTxtBox.Text,
+                        Password = PasswordTxtBox.Text,
+
+                    };
+                    bool isEmailExist = jobSeekerRepository.IsAccountExist(signUpModel.Email);
+                    if (isEmailExist)
+                    {
+                        MessageBox.Show(SignUpFormConstants.EmailIdExist, SignUpFormConstants.InValidForm, MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        jobSeekerRepository.AddUserAccount(signUpModel);
+                        MessageBox.Show(SignUpFormConstants.WelcomeMessage+" "+signUpModel.FirstName, SignUpFormConstants.AccountAdded, MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+
+
+                }
+                else
+                {
+                    MessageBox.Show(formErrorMessages.errorMessage, SignUpFormConstants.InValidForm, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
-        private SignUpModel GetAllFieldValues()
+        private FormErrorMessages GetAllFieldValues()
         {
-            SignUpModel signUpModel = new SignUpModel();
+            FormErrorMessages formErrorMessages = new FormErrorMessages();
+            formErrorMessages.isFormValid = true;
+            string firstName = FirstNameTxtBox.Text;
+            if (!FieldValidators.AreAplhabets(firstName))
+            {
+                formErrorMessages.isFormValid = false;
+                formErrorMessages.errorMessage = SignUpFormConstants.InValidFirstName;
+                return formErrorMessages;
+            }
 
+            string lastName = LastNameTxtBox.Text;
+            if (!FieldValidators.AreAplhabets(lastName))
+            {
+                formErrorMessages.isFormValid = false;
+                formErrorMessages.errorMessage = SignUpFormConstants.InValidLastName;
+                return formErrorMessages;
+            }
+            string emailAddress = EmailTxtBox.Text;
+            if (!FieldValidators.IsMailValid(emailAddress))
+            {
+                formErrorMessages.isFormValid = false;
+                formErrorMessages.errorMessage = SignUpFormConstants.InValidEmailName;
+                return formErrorMessages;
+            }
+            string phoneNumber = PhoneTxtBox.Text;
+            if (!FieldValidators.IsPhoneNumberValid(phoneNumber))
+            {
+                formErrorMessages.isFormValid = false;
+                formErrorMessages.errorMessage = SignUpFormConstants.InValidPhoneName;
+                return formErrorMessages;
+            }
+            string password = PasswordTxtBox.Text;
+            if (!FieldValidators.IsPasswordValid(password))
+            {
+                formErrorMessages.isFormValid = false;
+                formErrorMessages.errorMessage = SignUpFormConstants.InValidPasswordName;
+                return formErrorMessages;
+            }
+            string cPassword = CPasswordTxtBox.Text;
+            if (!FieldValidators.ConfirmPasswordMatched(cPassword, password))
+            {
+                formErrorMessages.isFormValid = false;
+                formErrorMessages.errorMessage = SignUpFormConstants.InValidCPasswordName;
+                return formErrorMessages;
+            }
+            return formErrorMessages;
         }
     }
 }
