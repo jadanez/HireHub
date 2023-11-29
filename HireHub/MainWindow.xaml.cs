@@ -1,4 +1,5 @@
-﻿using HireHub.JobSeekers;
+﻿using HireHub;
+using HireHub.JobSeekers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
