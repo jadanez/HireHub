@@ -70,7 +70,7 @@ namespace HireHub.JobSeekers
             FormErrorMessages formErrorMessages = new FormErrorMessages();
             formErrorMessages.isFormValid = true;
             string firstName = FirstNameTxtBox.Text;
-            if (!FieldValidators.AreAplhabets(firstName))
+            if (!FieldValidators.AreAlphabets(firstName))
             {
                 formErrorMessages.isFormValid = false;
                 formErrorMessages.errorMessage = SignUpFormConstants.InValidFirstName;
@@ -78,7 +78,7 @@ namespace HireHub.JobSeekers
             }
 
             string lastName = LastNameTxtBox.Text;
-            if (!FieldValidators.AreAplhabets(lastName))
+            if (!FieldValidators.AreAlphabets(lastName))
             {
                 formErrorMessages.isFormValid = false;
                 formErrorMessages.errorMessage = SignUpFormConstants.InValidLastName;

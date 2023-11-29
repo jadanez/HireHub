@@ -24,7 +24,7 @@ namespace HireHub.Database.Repository.JobSeeker
         public bool IsAccountExist(string emailId)
         {
             connection.Open();
-            string selectQuery = $"SELECT COUNT(*) from Account ac where ac.email like '{emailId}'";
+            string selectQuery = $"SELECT COUNT(*) from Account ac where ac.email = '{emailId}'";
             SqlCommand cmd = new SqlCommand(selectQuery, connection);
 
             int userCount = (int)cmd.ExecuteScalar();

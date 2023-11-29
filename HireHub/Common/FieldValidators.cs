@@ -12,7 +12,7 @@ namespace HireHub.Common
     {
         public static bool IsMailValid(string email)
         {
-            string regex = @"^[^@\s]+@[^@\s]+\.(com|net|org|gov)$";
+            string regex = "\\A(?:[a-z0-9!#$%&'*+\\/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+\\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\\Z";
             return Regex.IsMatch(email, regex, RegexOptions.IgnoreCase);
         }
         public static bool IsPhoneNumberValid(string phoneNumber)
@@ -27,7 +27,7 @@ namespace HireHub.Common
             return Regex.IsMatch(password, regex, RegexOptions.IgnoreCase);
         }
        
-        public static bool AreAplhabets(string input)
+        public static bool AreAlphabets(string input)
         {
             string regex = "^[A-Za-z]+$";
             return Regex.IsMatch(input, regex, RegexOptions.IgnoreCase);
