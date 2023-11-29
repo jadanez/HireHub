@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HireHub.JobSeekers.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,17 @@ namespace HireHub.JobSeekers
         public SignUpForm()
         {
             InitializeComponent();
+        }
+
+        private void SignUpBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SignUpModel signUpModel = GetAllFieldValues();
+        }
+
+        private SignUpModel GetAllFieldValues()
+        {
+            SignUpModel signUpModel = new SignUpModel();
+
         }
     }
 }

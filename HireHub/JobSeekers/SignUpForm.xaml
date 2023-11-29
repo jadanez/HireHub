@@ -110,7 +110,7 @@
     <Grid>
 
         <Label FontSize="40" Content="Sign-up Page" HorizontalAlignment="Left" Margin="54,28,0,0" VerticalAlignment="Top"/>
-        <TextBox FontSize="20" Text="FirstName" Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="54,115,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318" Height="63"/>
+
         <Separator HorizontalAlignment="Left" Margin="54,284,0,0" VerticalAlignment="Top" Height="4" RenderTransformOrigin="0.5,0.5" Width="664">
             <Separator.RenderTransform>
                 <TransformGroup>
@@ -121,13 +121,86 @@
                 </TransformGroup>
             </Separator.RenderTransform>
         </Separator>
-        <Button Foreground="White" Background="#271515" Style="{DynamicResource RoundedButton}" Content="Sign-up" HorizontalAlignment="Left" Margin="608,411,0,0" VerticalAlignment="Top" Height="44" Width="110"/>
-        <TextBox FontSize="20" Text="Last Name" Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="400,115,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318" Height="63"/>
-        <TextBox FontSize="20" Text="Email Address" Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="54,204,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318" Height="63"/>
-        <TextBox FontSize="20" Text="Phone" Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="400,204,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318" Height="63"/>
-        <TextBox FontSize="20" Text="Password" Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="54,321,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318" Height="63"/>
-        <TextBox FontSize="20" Text="Confirm Password" Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="400,321,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318" Height="63"/>
+        <Button Click="SignUpBtn_Click" Foreground="White" Background="#271515" Style="{DynamicResource RoundedButton}" Content="Sign-up" HorizontalAlignment="Left" Margin="608,411,0,0" VerticalAlignment="Top" Height="44" Width="110"/>
+        <TextBox Name="FirstNameTxtBox" FontSize="20" Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="54,115,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318" Height="63"/>
+        <TextBox Name="LastNameTxtBox" FontSize="20"  Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="400,115,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318" Height="63"/>
+        <TextBox Name="EmailTxtBox" FontSize="20" Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="54,204,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318" Height="63"/>
+        <TextBox Name="PhoneTxtBox" FontSize="20" Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="400,204,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318" Height="63"/>
+        <TextBox Name="PasswordTxtBox" FontSize="20" Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="54,321,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318" Height="63"/>
+        <TextBox Name="CPasswordTxtBox" FontSize="20" Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="400,321,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318" Height="63"/>
 
+        <TextBlock FontSize="20" IsHitTestVisible="False" Text="First Name" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="87,134,0,0" Foreground="#44484f">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=FirstNameTxtBox}" Value="">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBlock Text="Last Name" FontSize="20" IsHitTestVisible="False" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="431,134,0,0" Foreground="#44484f">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=LastNameTxtBox}" Value="">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBlock Text="Email" FontSize="20" IsHitTestVisible="False" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="87,222,0,0" Foreground="#44484f">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=EmailTxtBox}" Value="">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBlock Text="Phone" FontSize="20" IsHitTestVisible="False" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="431,222,0,0" Foreground="#44484f">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=PhoneTxtBox}" Value="">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBlock Text="Password" FontSize="20" IsHitTestVisible="False" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="87,339,0,0" Foreground="#44484f">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=PasswordTxtBox}" Value="">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBlock Text="Confirm Password" FontSize="20" IsHitTestVisible="False" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="431,339,0,0" Foreground="#44484f">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=CPasswordTxtBox}" Value="">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
     </Grid>
 
 </Window>
