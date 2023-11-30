@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 using System.Windows.Controls.Primitives;
 using System.Windows.Shapes;
 
-namespace HireHub.Database.Repository.JobSeeker
+namespace HireHub.Database.Queries
 {
-    class JobSeekerCRUD : DatabaseConnection
+    class AccountQueries : DatabaseConnection
     {
         SqlConnection connection;
 
-        public JobSeekerCRUD()
+        public AccountQueries()
         {
             connection = new SqlConnection(dbConnectionString);
         }

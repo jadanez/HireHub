@@ -1,6 +1,6 @@
 ﻿using HireHub.AllUsers.Models;
 using HireHub.Common;
-using HireHub.Database.Repository.JobSeeker;
+using HireHub.Database.Queries;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -35,7 +35,7 @@ namespace HireHub.JobSeekers
             {
                 if (formErrorMessages.isFormValid)
                 {
-                    JobSeekerCRUD jobSeekerRepository = new JobSeekerCRUD();
+                    AccountQueries jobSeekerRepository = new AccountQueries();
                     SignUpModel signUpModel = new SignUpModel()
                     {
                         Email = EmailTxtBox.Text,
