@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls.Primitives;
@@ -47,8 +48,24 @@ namespace HireHub.Database.Queries
             SqlCommand cmd = new SqlCommand(insertQuery, connection);
 
             cmd.ExecuteNonQuery();
-
             connection.Close();
+        }
+
+
+        // checks Account Table for matching email and password
+        public bool ValidateLoginCredentials(Login login)
+        {
+            int matchCount = 0; //init
+            string selectQuery = $"Select Count(*) FROM Account ac WHERE ac.email = '{login.EmailAddress}' AND ac.passphrase = '{login.Password}' AND ac.userType = '{login.UserType}'";
+
+            connection.Open();
+            SqlCommand cmd = new SqlCommand(selectQuery, connection);
+            matchCount = (int)cmd.ExecuteScalar();
+            connection.Close();
+
+            return (matchCount == 0 ? false : true);
+
+
         }
     }
 }
