@@ -1,4 +1,4 @@
-﻿using HireHub.JobSeekers.Models;
+﻿using HireHub.AllUsers.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -13,11 +13,11 @@ using System.Windows.Shapes;
 
 namespace HireHub.Database.Repository.JobSeeker
 {
-    class JobSeekerRepository : DatabaseConnection
+    class JobSeekerCRUD : DatabaseConnection
     {
         SqlConnection connection;
 
-        public JobSeekerRepository()
+        public JobSeekerCRUD()
         {
             connection = new SqlConnection(dbConnectionString);
         }
