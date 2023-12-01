@@ -23,6 +23,7 @@ namespace HireHub.JobSeekers
     /// </summary>
     public partial class SignUpForm : Window
     {
+        private string SignUpAsRBtnValue { get; set; }
         public SignUpForm()
         {
             InitializeComponent();
@@ -43,6 +44,7 @@ namespace HireHub.JobSeekers
                         LastName = LastNameTxtBox.Text,
                         Phone = PhoneTxtBox.Text,
                         Password = PasswordTxtBox.Text,
+                        UserType = SignUpAsRBtnValue
 
                     };
                     bool isEmailExist = jobSeekerRepository.IsAccountExist(signUpModel.Email);
@@ -53,7 +55,7 @@ namespace HireHub.JobSeekers
                     else
                     {
                         jobSeekerRepository.AddUserAccount(signUpModel);
-                        MessageBox.Show(SignUpFormConstants.WelcomeMessage+" "+signUpModel.FirstName, SignUpFormConstants.AccountAdded, MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show(SignUpFormConstants.WelcomeMessage + " " + signUpModel.FirstName, SignUpFormConstants.AccountAdded, MessageBoxButton.OK, MessageBoxImage.Information);
                     }
 
 
@@ -112,7 +114,23 @@ namespace HireHub.JobSeekers
                 formErrorMessages.errorMessage = SignUpFormConstants.InValidCPasswordName;
                 return formErrorMessages;
             }
+            if (String.IsNullOrEmpty(SignUpAsRBtnValue))
+            {
+                formErrorMessages.isFormValid = false;
+                formErrorMessages.errorMessage = SignUpFormConstants.InValidUserType;
+                return formErrorMessages;
+            }
             return formErrorMessages;
+        }
+
+        private void RBTNEmployer_Click(object sender, RoutedEventArgs e)
+        {
+            SignUpAsRBtnValue = SignUpFormConstants.Employer;
+        }
+
+        private void RBTNJobSeeker_Click(object sender, RoutedEventArgs e)
+        {
+            SignUpAsRBtnValue = SignUpFormConstants.JobSeeker;
         }
     }
 }

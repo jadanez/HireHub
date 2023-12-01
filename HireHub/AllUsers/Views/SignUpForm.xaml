@@ -121,7 +121,7 @@
                 </TransformGroup>
             </Separator.RenderTransform>
         </Separator>
-        <Button Click="SignUpBtn_Click" Foreground="White" Background="#271515" Style="{DynamicResource RoundedButton}" Content="Sign-up" HorizontalAlignment="Left" Margin="608,411,0,0" VerticalAlignment="Top" Height="44" Width="110"/>
+        <Button Click="SignUpBtn_Click" Foreground="White" Background="#271515" Style="{DynamicResource RoundedButton}" Content="Sign-up" HorizontalAlignment="Left" Margin="608,459,0,0" VerticalAlignment="Top" Height="44" Width="110"/>
         <TextBox Name="FirstNameTxtBox" FontSize="20" Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="54,115,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318" Height="63"/>
         <TextBox Name="LastNameTxtBox" FontSize="20"  Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="400,115,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318" Height="63"/>
         <TextBox Name="EmailTxtBox" FontSize="20" Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="54,204,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318" Height="63"/>
@@ -201,6 +201,9 @@
                 </Style>
             </TextBlock.Style>
         </TextBlock>
+        <RadioButton Click="RBTNEmployer_Click" Name="RBTNEmployer" GroupName="SignUpAs" FontSize="16" Content="Employer" HorizontalAlignment="Left" Margin="203,457,0,0" VerticalAlignment="Top"/>
+        <RadioButton Click="RBTNJobSeeker_Click" Name="RBTNJobSeeker" GroupName="SignUpAs" FontSize="16" Content="Job Seeker" HorizontalAlignment="Left" Margin="75,457,0,0" VerticalAlignment="Top"/>
+        <Label FontSize="20" Content="Sign-up as a?" HorizontalAlignment="Left" Margin="61,405,0,0" VerticalAlignment="Top"/>
     </Grid>
 
 </Window>
