@@ -18,5 +18,8 @@ namespace HireHub.Common
         public static string InValidCPasswordName = "Confirm password didnt matched password";
         public static string InValidPhoneName = "Invalid phone number";
         public static string InValidEmailName = "Invalid email address";
+        public static string InValidUserType = "Please select user type in form. Sign-up as employer or job seeker?";
+        public static string Employer = "Employer";
+        public static string JobSeeker = "Job Seeker";
     }
 }
