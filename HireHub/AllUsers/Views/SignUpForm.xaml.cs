@@ -1,6 +1,7 @@
 ﻿using HireHub.AllUsers.Models;
 using HireHub.Common;
 using HireHub.Database.Queries;
+using HireHub.Employers.Views;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -54,8 +55,27 @@ namespace HireHub.JobSeekers
                     }
                     else
                     {
-                        jobSeekerRepository.AddUserAccount(signUpModel);
-                        MessageBox.Show(SignUpFormConstants.WelcomeMessage + " " + signUpModel.FirstName, SignUpFormConstants.AccountAdded, MessageBoxButton.OK, MessageBoxImage.Information);
+                        bool isAccountAdded = jobSeekerRepository.AddUserAccount(signUpModel);
+                        if (isAccountAdded)
+                        {
+                            MessageBox.Show(SignUpFormConstants.WelcomeMessage + " " + signUpModel.FirstName, SignUpFormConstants.AccountAdded, MessageBoxButton.OK, MessageBoxImage.Information);
+                            if (signUpModel.UserType == SignUpFormConstants.Employer)
+                            {
+                                EmployerAddNewJob employerAddNewJob = new EmployerAddNewJob(signUpModel.Email, signUpModel.FirstName);
+                                this.Visibility = Visibility.Hidden;
+                                employerAddNewJob.Show();
+                            }
+                            else
+                            {
+                                //ToDo: Show Job Seekers User Portal
+                            }
+
+                        }
+                        else
+                        {
+                            MessageBox.Show(SignUpFormConstants.FailedToAddAccount, SignUpFormConstants.Failure, MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+
                     }
 
 

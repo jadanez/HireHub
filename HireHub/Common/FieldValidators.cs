@@ -37,5 +37,10 @@ namespace HireHub.Common
         {
             return CPassword.Equals(Password);
         }
+        public static bool IsNumeric(string numbers)
+        {
+            string regex = "^[0-9]+$";
+            return Regex.IsMatch(numbers, regex, RegexOptions.IgnoreCase);
+        }
     }
 }

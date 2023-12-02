@@ -39,16 +39,27 @@ namespace HireHub.Database.Queries
                 return false;
             }
         }
-        public void AddUserAccount(SignUpModel signUpModel)
+        public bool AddUserAccount(SignUpModel signUpModel)
         {
-            connection.Open();
+            try
+            {
+                connection.Open();
 
-            string insertQuery = $"INSERT INTO Account (userType, firstName, lastName, email, phoneNumber, passphrase) VALUES ('{signUpModel.UserType}','{signUpModel.FirstName}','{signUpModel.LastName}', '{signUpModel.Email}', '{signUpModel.Phone}', '{signUpModel.Password}')";
+                string insertQuery = $"INSERT INTO Account (userType, firstName, lastName, email, phoneNumber, passphrase) VALUES ('{signUpModel.UserType}','{signUpModel.FirstName}','{signUpModel.LastName}', '{signUpModel.Email}', '{signUpModel.Phone}', '{signUpModel.Password}')";
 
-            SqlCommand cmd = new SqlCommand(insertQuery, connection);
+                SqlCommand cmd = new SqlCommand(insertQuery, connection);
 
-            cmd.ExecuteNonQuery();
-            connection.Close();
+                int rowAffected = cmd.ExecuteNonQuery();
+                connection.Close();
+
+                ////Updated
+                return (rowAffected > 0);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
         }
 
 
