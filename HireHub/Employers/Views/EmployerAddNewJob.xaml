@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HireHub.Employers.Views"
         mc:Ignorable="d"
-        Title="EmployerAddNewJob" Height="780" Width="800">
+        Title="EmployerAddNewJob" Height="800" Width="800">
 
     <Window.Resources>
         <Style x:Key="FocusVisual">
@@ -273,7 +273,7 @@
         <Label FontSize="20" Content="Job Type" HorizontalAlignment="Left" Margin="31,209,0,0" VerticalAlignment="Top"/>
         <Label FontSize="20" Content="Experience Level" HorizontalAlignment="Left" Margin="390,209,0,0" VerticalAlignment="Top"/>
         <Label FontSize="20" Content="Job Description and Requirements" HorizontalAlignment="Left" Margin="31,341,0,0" VerticalAlignment="Top"/>
-        <Label FontSize="20" Content="[NAME]" Name="UserFirstNameLbl" HorizontalAlignment="Left" Margin="593,16,0,0" VerticalAlignment="Top"/>
+        <Label FontSize="20" Content="[NAME]" Name="UserFirstNameLbl" HorizontalAlignment="Left" Margin="593,24,0,0" VerticalAlignment="Top"/>
         <Image Name="UserImage" HorizontalAlignment="Left" Height="58" Margin="696,16,0,0" VerticalAlignment="Top" Width="58"/>
         <Label FontSize="20" Content="Salary (per hour)" HorizontalAlignment="Left" Margin="31,569,0,0" VerticalAlignment="Top"/>
         <Label FontSize="20" Content="Contact Person" HorizontalAlignment="Left" Margin="268,569,0,0" VerticalAlignment="Top"/>

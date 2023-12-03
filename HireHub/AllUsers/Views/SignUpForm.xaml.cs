@@ -25,19 +25,20 @@ namespace HireHub.JobSeekers
     public partial class SignUpForm : Window
     {
         private string SignUpAsRBtnValue { get; set; }
+        AccountQueries accountQueries;
         public SignUpForm()
         {
+            accountQueries = new AccountQueries();
             InitializeComponent();
         }
 
-        private void SignUpBtn_Click(object sender, RoutedEventArgs e)
+        private async void SignUpBtn_Click(object sender, RoutedEventArgs e)
         {
             FormErrorMessages formErrorMessages = GetAllFieldValues();
             if (formErrorMessages != null)
             {
                 if (formErrorMessages.isFormValid)
                 {
-                    AccountQueries jobSeekerRepository = new AccountQueries();
                     SignUpModel signUpModel = new SignUpModel()
                     {
                         Email = EmailTxtBox.Text,
@@ -48,28 +49,31 @@ namespace HireHub.JobSeekers
                         UserType = SignUpAsRBtnValue
 
                     };
-                    bool isEmailExist = jobSeekerRepository.IsAccountExist(signUpModel.Email);
+                    bool isEmailExist = (bool)await accountQueries.IsAccountExist(signUpModel.Email);
                     if (isEmailExist)
                     {
                         MessageBox.Show(SignUpFormConstants.EmailIdExist, SignUpFormConstants.InValidForm, MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     else
                     {
-                        bool isAccountAdded = jobSeekerRepository.AddUserAccount(signUpModel);
+                        bool isAccountAdded = (bool)await accountQueries.AddUserAccount(signUpModel);
                         if (isAccountAdded)
                         {
-                            MessageBox.Show(SignUpFormConstants.WelcomeMessage + " " + signUpModel.FirstName, SignUpFormConstants.AccountAdded, MessageBoxButton.OK, MessageBoxImage.Information);
-                            if (signUpModel.UserType == SignUpFormConstants.Employer)
                             {
-                                EmployerAddNewJob employerAddNewJob = new EmployerAddNewJob(signUpModel.Email, signUpModel.FirstName);
-                                this.Visibility = Visibility.Hidden;
-                                employerAddNewJob.Show();
-                            }
-                            else
-                            {
-                                //ToDo: Show Job Seekers User Portal
-                            }
+                                long UserId = await GetUserId(signUpModel.Email);
+                                MessageBox.Show(SignUpFormConstants.WelcomeMessage + " " + signUpModel.FirstName, SignUpFormConstants.AccountAdded, MessageBoxButton.OK, MessageBoxImage.Information);
+                                if (signUpModel.UserType == SignUpFormConstants.Employer)
+                                {
+                                    EmployerAddNewJob employerAddNewJob = new EmployerAddNewJob(UserId, signUpModel.Email, signUpModel.FirstName);
+                                    this.Visibility = Visibility.Hidden;
+                                    employerAddNewJob.Show();
+                                }
+                                else
+                                {
+                                    //ToDo: Show Job Seekers User Portal
+                                }
 
+                            }
                         }
                         else
                         {
@@ -85,6 +89,12 @@ namespace HireHub.JobSeekers
                     MessageBox.Show(formErrorMessages.errorMessage, SignUpFormConstants.InValidForm, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        }
+
+        public async Task<long> GetUserId(string emailId)
+        {
+            long userAccountId = await accountQueries.GetUserAccountId(emailId);
+            return userAccountId;
         }
 
         private FormErrorMessages GetAllFieldValues()
