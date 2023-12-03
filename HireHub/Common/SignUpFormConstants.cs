@@ -10,7 +10,9 @@ namespace HireHub.Common
     {
         public static string InValidForm = "Invalid form data";
         public static string AccountAdded = "Account added";
+        public static string Failure = "Failure";
         public static string WelcomeMessage = "Welcome ";
+        public static string FailedToAddAccount = "Something went wrong. Failed to add account. Please try again later!";
         public static string EmailIdExist = "Email Id exist. \nAlready a user? Please login";
         public static string InValidFirstName = "Invalid first name";
         public static string InValidLastName = "Invalid last name";

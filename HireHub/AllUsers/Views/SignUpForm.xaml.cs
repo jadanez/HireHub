@@ -1,6 +1,7 @@
 ﻿using HireHub.AllUsers.Models;
 using HireHub.Common;
 using HireHub.Database.Queries;
+using HireHub.Employers.Views;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -24,19 +25,20 @@ namespace HireHub.JobSeekers
     public partial class SignUpForm : Window
     {
         private string SignUpAsRBtnValue { get; set; }
+        AccountQueries accountQueries;
         public SignUpForm()
         {
+            accountQueries = new AccountQueries();
             InitializeComponent();
         }
 
-        private void SignUpBtn_Click(object sender, RoutedEventArgs e)
+        private async void SignUpBtn_Click(object sender, RoutedEventArgs e)
         {
             FormErrorMessages formErrorMessages = GetAllFieldValues();
             if (formErrorMessages != null)
             {
                 if (formErrorMessages.isFormValid)
                 {
-                    AccountQueries jobSeekerRepository = new AccountQueries();
                     SignUpModel signUpModel = new SignUpModel()
                     {
                         Email = EmailTxtBox.Text,
@@ -47,15 +49,37 @@ namespace HireHub.JobSeekers
                         UserType = SignUpAsRBtnValue
 
                     };
-                    bool isEmailExist = jobSeekerRepository.IsAccountExist(signUpModel.Email);
+                    bool isEmailExist = (bool)await accountQueries.IsAccountExist(signUpModel.Email);
                     if (isEmailExist)
                     {
                         MessageBox.Show(SignUpFormConstants.EmailIdExist, SignUpFormConstants.InValidForm, MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     else
                     {
-                        jobSeekerRepository.AddUserAccount(signUpModel);
-                        MessageBox.Show(SignUpFormConstants.WelcomeMessage + " " + signUpModel.FirstName, SignUpFormConstants.AccountAdded, MessageBoxButton.OK, MessageBoxImage.Information);
+                        bool isAccountAdded = (bool)await accountQueries.AddUserAccount(signUpModel);
+                        if (isAccountAdded)
+                        {
+                            {
+                                long UserId = await GetUserId(signUpModel.Email);
+                                MessageBox.Show(SignUpFormConstants.WelcomeMessage + " " + signUpModel.FirstName, SignUpFormConstants.AccountAdded, MessageBoxButton.OK, MessageBoxImage.Information);
+                                if (signUpModel.UserType == SignUpFormConstants.Employer)
+                                {
+                                    EmployerAddNewJob employerAddNewJob = new EmployerAddNewJob(UserId, signUpModel.Email, signUpModel.FirstName);
+                                    this.Visibility = Visibility.Hidden;
+                                    employerAddNewJob.Show();
+                                }
+                                else
+                                {
+                                    //ToDo: Show Job Seekers User Portal
+                                }
+
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show(SignUpFormConstants.FailedToAddAccount, SignUpFormConstants.Failure, MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+
                     }
 
 
@@ -65,6 +89,12 @@ namespace HireHub.JobSeekers
                     MessageBox.Show(formErrorMessages.errorMessage, SignUpFormConstants.InValidForm, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        }
+
+        public async Task<long> GetUserId(string emailId)
+        {
+            long userAccountId = await accountQueries.GetUserAccountId(emailId);
+            return userAccountId;
         }
 
         private FormErrorMessages GetAllFieldValues()
