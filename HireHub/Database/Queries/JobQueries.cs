@@ -39,54 +39,6 @@ namespace HireHub.Database.Queries
                 return false;
             }
         }
-
-        //public List<JobFeedCard> LoadJobSeekerHomePage()
-        //{
-        //    Debug.WriteLine("Entered DB debug");
-        //    Trace.WriteLine("Entered DB trace");
-        //    List<JobFeedCard> jobFeedCardList = new List<JobFeedCard>();
-
-        //    string selectQuery = $"SELECT jobId, roleName, jobDetails, jobStatus from Job";
-
-        //    try
-        //    {
-        //        connection.Open();
-        //        SqlCommand cmd = new SqlCommand(selectQuery, connection);
-        //        SqlDataReader reader = cmd.ExecuteReader();
-        //        Debug.WriteLine("In try");
-        //        if (!reader.Read())
-        //            throw new ApplicationException("MISSING Transaction Returned By Financial Institution. Transaction was not found in the database.");
-        //        while (reader.HasRows)
-        //        {    //Every new row will create a new dictionary that holds the columns
-        //            Debug.WriteLine("In while");
-        //            while (reader.Read())
-        //            {
-        //                Debug.WriteLine("In if");
-        //                JobFeedCard jobCard = new JobFeedCard();
-        //                jobCard.roleName = reader["roleName"].ToString();
-        //                jobCard.jobDetails = reader["jobDetails"].ToString();
-        //                jobCard.jobId = reader.GetInt32(0);
-        //                Debug.WriteLine("Job Id " + jobCard.jobId);
-        //                Debug.WriteLine("Role Name " + jobCard.roleName);
-        //                Trace.WriteLine("Job Details " + jobCard.jobDetails);
-        //                jobFeedCardList.Add(jobCard);
-        //            }
-        //            reader.NextResult();
-        //        }
-        //        reader.Close();
-        //        return jobFeedCardList;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine(ex.ToString());
-        //        return null;
-        //    }
-        //    finally
-        //    {
-        //        connection.Close();
-        //    }
-
-        //}
         public List<JobDetail> SearchJob(string searchString)
         {
             List<JobDetail> jobDetails = new List<JobDetail>();
