@@ -119,7 +119,7 @@ namespace HireHub
                     }
                     else
                     {
-                        EmployerHomePage employerHomePage = new EmployerHomePage();
+                        EmployerHomePage employerHomePage = new EmployerHomePage(login.EmailAddress, login.UserType);
                         this.Visibility = Visibility.Hidden;
                         employerHomePage.Show();
                     }

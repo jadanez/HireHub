@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="EmployerHomePage" Height="450" Width="800">
     <Grid>
-        
+        <Button x:Name="YourJobs" Content="Your Jobs" HorizontalAlignment="Left" Margin="45,26,0,0" VerticalAlignment="Top" Click="Button_Click_1" Background="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.247,-0.484"/>
+        <Button x:Name="AddJobs" Content="Create New Job" HorizontalAlignment="Left" Margin="122,26,0,0" VerticalAlignment="Top" Click="AddJobs_Click" Background="{x:Null}" BorderBrush="{x:Null}"/>
+        <Label x:Name="EmpProfileName" Content="Your Name" HorizontalAlignment="Left" Margin="633,36,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.653,-0.037" Loaded="Window_Loaded"/>
+        <Image x:Name="EmpProfilePhoto" HorizontalAlignment="Left" Height="49" Margin="707,23,0,0" VerticalAlignment="Top" Width="65" Source="/Employers/Views/profileLogo.png" MouseLeftButtonDown="Profile_Click"/>
     </Grid>
 </Window>

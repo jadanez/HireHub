@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Diagnostics.CodeAnalysis;
+using System.Dynamic;
 using System.Linq;
 using System.Security.Principal;
 using System.Text;
@@ -115,5 +116,43 @@ namespace HireHub.Database.Queries
                 return 0;
             }
         }
+
+        public Account getAccountDetails(string empEmail, string userType)
+        {
+            Account accountDetails = new Account();
+            accountDetails.Email = empEmail;
+            accountDetails.UserType = userType;
+
+            string selectQuery = $"Select * FROM Account ac WHERE ac.email = '{empEmail}' AND ac.userType = '{userType}'";
+
+            connection.Open();
+            SqlCommand cmd = new SqlCommand(selectQuery, connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+               
+                accountDetails.AccountId = reader.GetInt32(reader.GetOrdinal("accountID"));
+                accountDetails.FirstName = reader.GetString(reader.GetOrdinal("firstName"));
+                accountDetails.LastName = reader.GetString(reader.GetOrdinal("lastName"));
+                accountDetails.Phone = reader.GetString(reader.GetOrdinal("phoneNumber"));
+                accountDetails.Password = reader.GetString(reader.GetOrdinal("passphrase")); ;
+
+               
+            }
+
+
+
+            connection.Close();
+
+          
+
+
+            return accountDetails;
+
+
+        }
+
+
     }
 }
