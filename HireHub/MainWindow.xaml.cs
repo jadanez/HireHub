@@ -124,12 +124,6 @@ namespace HireHub
                         employerHomePage.Show();
                     }
 
-
-
-
-
-
-
                     //reset values of inputs
                     
                    /* EmailAddressLogin.Text = null;
