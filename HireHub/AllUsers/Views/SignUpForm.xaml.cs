@@ -2,6 +2,7 @@
 using HireHub.Common;
 using HireHub.Database.Queries;
 using HireHub.Employers.Views;
+using HireHub.JobSeekers.Views;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -70,7 +71,9 @@ namespace HireHub.JobSeekers
                                 }
                                 else
                                 {
-                                    //ToDo: Show Job Seekers User Portal
+                                    JobSeekerEditProfile jobSeekerEditProfile = new JobSeekerEditProfile(UserId, signUpModel.Email);
+                                    this.Visibility = Visibility.Hidden;
+                                    jobSeekerEditProfile.Show();
                                 }
 
                             }
