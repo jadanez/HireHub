@@ -28,7 +28,7 @@ namespace HireHub.Employers.Views
         public string empLastName;
         public string empEmail;
         public long userId;
-
+        public string userType;
 
         public EmployerHomePage(string emailAddress, string userType)
         {
@@ -39,7 +39,7 @@ namespace HireHub.Employers.Views
             this.empLastName = accountDetails.LastName;
             this.empEmail = accountDetails.Email;
             this.userId = accountDetails.AccountId;
-
+            this.userType = userType;
             InitializeComponent();
             
 
@@ -160,15 +160,15 @@ namespace HireHub.Employers.Views
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
 
-            MessageBox.Show("Your jobs!");
+           /* MessageBox.Show("Your jobs!");*/
         }
 
 
-        private void See_Applicants_Click(string buttonName)
+        private void See_Applicants_Click(string btnName)
         {
 
-            MessageBox.Show($"Button '{buttonName}' clicked!");
-            EmployerSeeApplicants seeApplicants = new EmployerSeeApplicants(buttonName);
+           /* MessageBox.Show($"Button '{btnName}' clicked!");*/
+            EmployerSeeApplicants seeApplicants = new EmployerSeeApplicants(btnName,  empFirstName,  empLastName,  empEmail,  userId,  userType);
             this.Visibility = Visibility.Hidden;
             seeApplicants.Show();
 
