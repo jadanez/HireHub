@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HireHub.JobSeekers.Views"
         mc:Ignorable="d"
-        Title="JobSeekerHomepage" Height="450" Width="800">
+        Title="JobSeekerHomepage" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen" Icon="/HireHub.jpg">
     <Window.Resources>
 
         <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
@@ -54,21 +55,63 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+        <Style x:Key="RoundedTextBox" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border CornerRadius="8" x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+
     </Window.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="793*"/>
-            <ColumnDefinition Width="7*"/>
-        </Grid.ColumnDefinitions>
-
         <StackPanel>
-            <TextBox Name="SearchBox" VerticalAlignment="Top" HorizontalAlignment="left" Margin="200,20,0,0" Height="34" Text=" Type Here To Filter" Width="450" Background="#FFEEEEF2" Cursor="None"/>
 
-            <Button Content="Search" HorizontalAlignment="center" Margin="300,-43,0,0" Style="{DynamicResource RoundedButton}" VerticalAlignment="Top" Height="34" Width="54"/>
+            <TextBox Name="SearchBox" VerticalAlignment="Top" HorizontalAlignment="left"  Style="{DynamicResource RoundedTextBox}" Margin="200,20,0,0" Height="34" Text=" Type Here To Filter" Width="450" Background="#FFEEEEF2" AutomationProperties.HelpText="Type keyword to search job " Padding="8,8,0,0"/>
+
+            <Button Content="Search" HorizontalAlignment="center" Margin="300,-43,0,0" Style="{DynamicResource RoundedButton}"  VerticalAlignment="Top" Height="34" Width="54" Click="SearchBtn_Click"/>
 
             <Ellipse Height="35" Margin="0,-50,10,0" Stroke="Black" Width="35" HorizontalAlignment="right">
                 <Ellipse.Fill>
-                    <ImageBrush ImageSource="D:\SQA Conestoga\High Quality Software Programming\HireHub_Project\Images\avatar.png" />
+                    <ImageBrush ImageSource="\Common\Images\avatar.png" />
                 </Ellipse.Fill>
             </Ellipse>
 
@@ -82,7 +125,7 @@
 
                             <Rectangle Margin="10,10,10,0" Height="70" Stroke="Black" Width="auto">
                                 <Rectangle.Fill>
-                                    <ImageBrush ImageSource="D:\SQA Conestoga\High Quality Software Programming\HireHub_Project\Images\TeamWall.jpg" />
+                                    <ImageBrush ImageSource="\Common\Images\TeamWall.jpg" />
                                 </Rectangle.Fill>
                             </Rectangle>
 
@@ -100,7 +143,7 @@
              TextWrapping="Wrap" Text="{Binding jobDetails}"
             FontWeight="Bold" FontSize="14" FontFamily="Calibri"/>
 
-                            <Button x:Name="SeeDetailsBtn" Content="See Details" HorizontalAlignment="Right" Margin="0,-50,40,10" Style="{DynamicResource RoundedButton}" VerticalAlignment="Top" Height="34" Width="70" FontWeight="Bold" Background="#FF1C0EE4" Foreground="#FFF8F6F6" Click="SeeDetailsBtn_Click"/>
+                            <Button x:Name="SeeDetailsBtn" Content="See Details" HorizontalAlignment="Right" Margin="0,-50,40,10" Style="{DynamicResource RoundedButton}"  VerticalAlignment="Top" Height="34" Width="70" FontWeight="Bold" Background="#FF1C0EE4" Foreground="#FFF8F6F6" Click="SeeDetailsBtn_Click"/>
 
                         </StackPanel>
                     </ItemContainerTemplate>

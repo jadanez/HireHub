@@ -1,6 +1,7 @@
 ﻿using HireHub.AllUsers.Models;
 using HireHub.Employers.Models;
 using HireHub.JobSeekers.Models;
+using HireHub.JobSeekers.Views;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -9,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace HireHub.Database.Queries
 {
@@ -39,38 +41,42 @@ namespace HireHub.Database.Queries
                 return false;
             }
         }
-        public List<JobDetail> SearchJob(string searchString)
+        public async Task<bool> SearchJob(string searchString)
         {
             List<JobDetail> jobDetails = new List<JobDetail>();
 
-            string selectQueryBasedOnSearchString = $"SELECT jobId, employerId,jobStatus, roleName, companyName, jobType, experienceLevel, jobDetails, salary, jobLocation, hiringManager from Job jobInstance where jobInstance.roleName LIKE '%{searchString}%'";
-            string searchStringGeneric = $"SELECT jobId,employerId,jobStatus, roleName, companyName, jobType, experienceLevel, jobDetails, salary, jobLocation, hiringManager from Job";
-
             SqlCommand cmd;
-            if (searchString == "Generic")
+            if (String.IsNullOrEmpty(searchString) || searchString == "Generic")
             {
+               string  searchStringGeneric = $"SELECT * from Job";
                 cmd = new SqlCommand(searchStringGeneric, connection);
+                Debug.WriteLine("SQL SEARCH STRING IF:" + searchStringGeneric);
             }
             else
             {
+               string selectQueryBasedOnSearchString = $"SELECT * from Job jobInstance where jobInstance.roleName LIKE '%{searchString}%'";
                 cmd = new SqlCommand(selectQueryBasedOnSearchString, connection);
+                Debug.WriteLine("SQL SEARCH STRING ELSE:" + selectQueryBasedOnSearchString);
             }
-           
+
             try
             {
-                connection.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                if (!reader.Read())
+                await connection.OpenAsync();
+                cmd.CommandTimeout = 100000;
+                using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                 {
-                    throw new ApplicationException("MISSING returned transaction");
-                }
-                while (reader.HasRows)
-                {
-                    if (reader != null)
+                    Debug.WriteLine("Entered try, executed reader");
+                    if (reader == null)
                     {
-                        while (reader.Read())
+                        Debug.WriteLine("Reader is null");
+                        throw new Exception("Something went wrong while performing serach. Contact your administrator.");
+                    }
+                    else
+                    {
+                        Debug.WriteLine("In else");
+                        while ( await reader.ReadAsync())
                         {
+                            Debug.WriteLine("Reading ++");
                             JobDetail jobDetail = new JobDetail();
 
                             jobDetail.roleName = reader["roleName"].ToString();
@@ -90,15 +96,21 @@ namespace HireHub.Database.Queries
                             Debug.WriteLine("Job Details " + jobDetail.jobDetails);
                         }
                         reader.NextResult();
+
+                        reader.Close();
+                        Debug.WriteLine("Reader close");
+                        JobSeekerHomepage.searchResult = jobDetails;
+
+                        int rowsAffected = (int)reader.RecordsAffected;
+
+                        return (rowsAffected>0);
                     }
                 }
-                reader.Close();
-                return jobDetails;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
-                return null;
+                return false;
             }
             finally
             {
@@ -106,6 +118,66 @@ namespace HireHub.Database.Queries
             }
 
         }
+
+        public async Task<List<Job>> GetMyJobs(long empId)
+        {
+             List<Job> myJobs = new List<Job>();
+
+            try
+            {
+                string selectQuery = $"Select * FROM Job j WHERE j.employerID = '{empId}'";
+
+                connection.Open();
+                SqlCommand cmd = new SqlCommand(selectQuery, connection);
+                SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+                while (reader.Read())
+                {
+                    Job job = new Job();
+                    job.jobId = reader.GetInt32(reader.GetOrdinal("jobId"));
+                    job.roleName = reader.GetString(reader.GetOrdinal("roleName"));
+                    job.jobDetails = reader.GetString(reader.GetOrdinal("jobDetails"));
+                    job.jobType = reader.GetString(reader.GetOrdinal("jobType"));
+                    job.experienceLevel = reader.GetString(reader.GetOrdinal("experienceLevel"));
+                    job.jobStatus = reader.GetString(reader.GetOrdinal("jobStatus"));
+                    job.hiringManager = reader.GetString(reader.GetOrdinal("hiringManager"));
+                    job.salary = reader.GetDecimal(reader.GetOrdinal("salary"));
+                    job.companyName = reader.GetString(reader.GetOrdinal("companyName"));
+                   
+                    myJobs.Add(job);
+
+                }
+
+
+
+                connection.Close();
+
+
+
+
+
+               
+
+
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+
+
+            }
+
+
+
+
+
+            return myJobs;
+
+
+        }
+
+
 
     }
 }
