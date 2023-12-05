@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HireHub.JobSeekers.Models
+namespace HireHub.Common.Models
 {
-    class JobSeekerEditProfileModel
+    public class ProfileModel
     {
         public long profileId { get; set; }
         public long accountId { get; set; }

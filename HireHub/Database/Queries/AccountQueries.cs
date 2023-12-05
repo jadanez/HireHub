@@ -103,6 +103,7 @@ namespace HireHub.Database.Queries
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(dt);
                 string userAccountIdString = dt.Rows[0]["accountId"].ToString();
+                connection.Close();
                 if (int.TryParse(userAccountIdString, out int Id))
                 {
                     return Id;
@@ -137,6 +138,7 @@ namespace HireHub.Database.Queries
                 string userPhoneNumberString = dt.Rows[0]["phoneNumber"].ToString();
                 string userType = dt.Rows[0]["userType"].ToString();
                 int userId;
+                connection.Close();
                 if (int.TryParse(userAccountIdString, out int Id))
                 {
                     userId = Id;

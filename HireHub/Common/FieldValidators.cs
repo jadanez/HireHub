@@ -42,5 +42,10 @@ namespace HireHub.Common
             string regex = "^[0-9]+$";
             return Regex.IsMatch(numbers, regex, RegexOptions.IgnoreCase);
         }
+        public static bool IsDecimalNumber(string numbers)
+        {
+            string regex = "^[0-9]*(?:\\.[0-9]+)?$";
+            return Regex.IsMatch(numbers, regex, RegexOptions.IgnoreCase);
+        }
     }
 }

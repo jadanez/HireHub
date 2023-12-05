@@ -386,7 +386,7 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <TextBox x:Name="EmployementHistoryTxtBox" FontSize="16" Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="55,537,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="671" Height="131"/>
+            <TextBox AcceptsReturn="True" TextWrapping="Wrap" x:Name="EmployementHistoryTxtBox" FontSize="16" Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="55,537,0,0"  VerticalAlignment="Top" Width="671" Height="131"/>
             <TextBlock FontSize="16" IsHitTestVisible="False" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="310,589,0,0" Foreground="#44484f">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
