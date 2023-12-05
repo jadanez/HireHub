@@ -40,22 +40,104 @@ namespace HireHub.Employers.Views
             this.userId = accountDetails.AccountId;
 
             InitializeComponent();
+            
+
+
+
         }
 
 
 
         //set profile Name
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_ContentRendered(object sender, EventArgs e)
         {
 
-            JobQueries getJobs = new JobQueries();
-            List<Job> myJobs = getJobs.GetMyJobs(userId);
+            EmpProfileName.Content = empFirstName;
+
+            try
+            {
+                JobQueries getJobs = new JobQueries();
+                List<Job> myJobs = await getJobs.GetMyJobs(userId);
+
+
+                foreach (var job in myJobs)
+                {
+                    // Create a Rectangle
+                    Rectangle rectangle = new Rectangle();
+                    rectangle.Width = 500;
+                    rectangle.Height = 100;
+
+                    // Create an ImageBrush with your image source
+                    ImageBrush imageBrush = new ImageBrush();
+                    imageBrush.ImageSource = new BitmapImage(new Uri("../../../Common/Images/TeamWall.jpg", UriKind.RelativeOrAbsolute));
+
+
+                    // Set the Fill property of the Rectangle to the ImageBrush
+                    rectangle.Fill = imageBrush;
+
+
+                    //create a stackpanel for job
+                    StackPanel stackPanelDetails = new StackPanel();
+                    stackPanelDetails.Background = Brushes.LightBlue;
+                    stackPanelDetails.Width = 500;
+
+
+
+                    // Create TextBlock for the job name
+                    TextBlock roleName = new TextBlock();
+                    roleName.Text = job.roleName;
+                    roleName.HorizontalAlignment = HorizontalAlignment.Stretch;
+                    roleName.VerticalAlignment = VerticalAlignment.Top;
+                    roleName.Padding = new Thickness(10, 10, 10, 10);
+
+                    //create text block for job details
+                    TextBlock jobDetails = new TextBlock();
+                    jobDetails.Text = job.jobDetails;
+                    jobDetails.HorizontalAlignment = HorizontalAlignment.Stretch;
+                    jobDetails.VerticalAlignment = VerticalAlignment.Top;
+                    jobDetails.TextWrapping = TextWrapping.Wrap;
+                    jobDetails.Padding = new Thickness(10, 10, 10, 10);
+
+
+                    //create button to view details
+                    Button btnSeeApplicants = new Button();
+                    btnSeeApplicants.Content = "See Applicants";
+                    btnSeeApplicants.Width = 100;
+                    btnSeeApplicants.HorizontalAlignment = HorizontalAlignment.Right;
+                    btnSeeApplicants.Name = "btnJob" + job.jobId.ToString();
+                    btnSeeApplicants.Margin = new Thickness(10, 10, 10, 10);
+
+
+
+
+                    stackPanelDetails.Children.Add(roleName);
+                    stackPanelDetails.Children.Add(jobDetails);
+                    stackPanelDetails.Children.Add(btnSeeApplicants);
+
+
+
+
+                    // Create a StackPanel to hold the Rectangle and the stackpanel
+                    StackPanel stackPanel = new StackPanel();
+                    stackPanel.Children.Add(rectangle);
+                    stackPanel.Children.Add(stackPanelDetails);
+                    stackPanel.Margin = new Thickness(0, 10, 0, 0);
+                    
+                    
+                    
+                    // Add the StackPanel to your JobsStackPanel
+                    JobsStackPanel.Children.Add(stackPanel);
+                }
 
 
 
 
 
-            /* EmpProfileName.Content = empFirstName;*/
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            }
 
         }
 

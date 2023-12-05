@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HireHub.AllUsers.Models
 {
-    internal class Job
+    public class Job
     {
 
         public int jobId { get; set; }

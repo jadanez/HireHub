@@ -164,9 +164,6 @@ namespace HireHub.Database.Queries
             return myJobs;
 
 
-
-
-
         }
 
 
