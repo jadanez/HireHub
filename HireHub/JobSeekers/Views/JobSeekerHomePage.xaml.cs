@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using HireHub.Database.Queries;
+using HireHub.Common.Models;
 
 namespace HireHub.JobSeekers.Views
 {
@@ -96,7 +97,7 @@ namespace HireHub.JobSeekers.Views
                 }
                 else
                 {
-                    MessageBox.Show(formErrorMessages.errorMessage, SignUpFormConstants.InValidForm, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(formErrorMessages.errorMessage, AccountFormConstants.InValidForm, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -157,7 +158,7 @@ namespace HireHub.JobSeekers.Views
                 }
                 else
                 {
-                    MessageBox.Show(formErrorMessages.errorMessage, SignUpFormConstants.InValidForm, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(formErrorMessages.errorMessage, AccountFormConstants.InValidForm, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

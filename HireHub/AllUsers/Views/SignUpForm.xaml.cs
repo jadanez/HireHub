@@ -2,6 +2,7 @@
 using HireHub.Common;
 using HireHub.Database.Queries;
 using HireHub.Employers.Views;
+using HireHub.JobSeekers.Views;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -52,7 +53,7 @@ namespace HireHub.JobSeekers
                     bool isEmailExist = (bool)await accountQueries.IsAccountExist(signUpModel.Email);
                     if (isEmailExist)
                     {
-                        MessageBox.Show(SignUpFormConstants.EmailIdExist, SignUpFormConstants.InValidForm, MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show(AccountFormConstants.EmailIdExist, AccountFormConstants.InValidForm, MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     else
                     {
@@ -61,8 +62,8 @@ namespace HireHub.JobSeekers
                         {
                             {
                                 long UserId = await GetUserId(signUpModel.Email);
-                                MessageBox.Show(SignUpFormConstants.WelcomeMessage + " " + signUpModel.FirstName, SignUpFormConstants.AccountAdded, MessageBoxButton.OK, MessageBoxImage.Information);
-                                if (signUpModel.UserType == SignUpFormConstants.Employer)
+                                MessageBox.Show(AccountFormConstants.WelcomeMessage + " " + signUpModel.FirstName, AccountFormConstants.AccountAdded, MessageBoxButton.OK, MessageBoxImage.Information);
+                                if (signUpModel.UserType == AccountFormConstants.Employer)
                                 {
                                     EmployerAddNewJob employerAddNewJob = new EmployerAddNewJob(UserId, signUpModel.Email, signUpModel.FirstName);
                                     this.Visibility = Visibility.Hidden;
@@ -70,14 +71,16 @@ namespace HireHub.JobSeekers
                                 }
                                 else
                                 {
-                                    //ToDo: Show Job Seekers User Portal
+                                    JobSeekerEditProfile jobSeekerEditProfile = new JobSeekerEditProfile(UserId, signUpModel.Email);
+                                    this.Visibility = Visibility.Hidden;
+                                    jobSeekerEditProfile.Show();
                                 }
 
                             }
                         }
                         else
                         {
-                            MessageBox.Show(SignUpFormConstants.FailedToAddAccount, SignUpFormConstants.Failure, MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show(AccountFormConstants.FailedToAddAccount, AccountFormConstants.Failure, MessageBoxButton.OK, MessageBoxImage.Error);
                         }
 
                     }
@@ -86,7 +89,7 @@ namespace HireHub.JobSeekers
                 }
                 else
                 {
-                    MessageBox.Show(formErrorMessages.errorMessage, SignUpFormConstants.InValidForm, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(formErrorMessages.errorMessage, AccountFormConstants.InValidForm, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -105,7 +108,7 @@ namespace HireHub.JobSeekers
             if (!FieldValidators.AreAlphabets(firstName))
             {
                 formErrorMessages.isFormValid = false;
-                formErrorMessages.errorMessage = SignUpFormConstants.InValidFirstName;
+                formErrorMessages.errorMessage = AccountFormConstants.InValidFirstName;
                 return formErrorMessages;
             }
 
@@ -113,41 +116,41 @@ namespace HireHub.JobSeekers
             if (!FieldValidators.AreAlphabets(lastName))
             {
                 formErrorMessages.isFormValid = false;
-                formErrorMessages.errorMessage = SignUpFormConstants.InValidLastName;
+                formErrorMessages.errorMessage = AccountFormConstants.InValidLastName;
                 return formErrorMessages;
             }
             string emailAddress = EmailTxtBox.Text;
             if (!FieldValidators.IsMailValid(emailAddress))
             {
                 formErrorMessages.isFormValid = false;
-                formErrorMessages.errorMessage = SignUpFormConstants.InValidEmailName;
+                formErrorMessages.errorMessage = AccountFormConstants.InValidEmailName;
                 return formErrorMessages;
             }
             string phoneNumber = PhoneTxtBox.Text;
             if (!FieldValidators.IsPhoneNumberValid(phoneNumber))
             {
                 formErrorMessages.isFormValid = false;
-                formErrorMessages.errorMessage = SignUpFormConstants.InValidPhoneName;
+                formErrorMessages.errorMessage = AccountFormConstants.InValidPhoneName;
                 return formErrorMessages;
             }
             string password = PasswordTxtBox.Text;
             if (!FieldValidators.IsPasswordValid(password))
             {
                 formErrorMessages.isFormValid = false;
-                formErrorMessages.errorMessage = SignUpFormConstants.InValidPasswordName;
+                formErrorMessages.errorMessage = AccountFormConstants.InValidPasswordName;
                 return formErrorMessages;
             }
             string cPassword = CPasswordTxtBox.Text;
             if (!FieldValidators.ConfirmPasswordMatched(cPassword, password))
             {
                 formErrorMessages.isFormValid = false;
-                formErrorMessages.errorMessage = SignUpFormConstants.InValidCPasswordName;
+                formErrorMessages.errorMessage = AccountFormConstants.InValidCPasswordName;
                 return formErrorMessages;
             }
             if (String.IsNullOrEmpty(SignUpAsRBtnValue))
             {
                 formErrorMessages.isFormValid = false;
-                formErrorMessages.errorMessage = SignUpFormConstants.InValidUserType;
+                formErrorMessages.errorMessage = AccountFormConstants.InValidUserType;
                 return formErrorMessages;
             }
             return formErrorMessages;
@@ -155,12 +158,12 @@ namespace HireHub.JobSeekers
 
         private void RBTNEmployer_Click(object sender, RoutedEventArgs e)
         {
-            SignUpAsRBtnValue = SignUpFormConstants.Employer;
+            SignUpAsRBtnValue = AccountFormConstants.Employer;
         }
 
         private void RBTNJobSeeker_Click(object sender, RoutedEventArgs e)
         {
-            SignUpAsRBtnValue = SignUpFormConstants.JobSeeker;
+            SignUpAsRBtnValue = AccountFormConstants.JobSeeker;
         }
     }
 }

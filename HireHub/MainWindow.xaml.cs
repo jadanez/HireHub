@@ -58,7 +58,7 @@ namespace HireHub
             if (!FieldValidators.IsMailValid(emailLogin))
             {
                 formErrorMessages.isFormValid = false;
-                formErrorMessages.errorMessage = SignUpFormConstants.InValidEmailName;         
+                formErrorMessages.errorMessage = AccountFormConstants.InValidEmailName;         
                 
             }
 

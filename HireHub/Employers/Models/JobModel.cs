@@ -16,7 +16,7 @@ namespace HireHub.Employers.Models
         public string JobType { get; set; }
         public string ExperienceLevel { get; set; }
         public string JobDetails { get; set; }
-        public int Salary { get; set; }
+        public double Salary { get; set; }
         public string JobLocation { get; set; }
         public string HiringManager { get; set; }
     }
