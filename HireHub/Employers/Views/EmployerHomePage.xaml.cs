@@ -53,6 +53,7 @@ namespace HireHub.Employers.Views
         {
 
             EmpProfileName.Content = empFirstName;
+            YourJobs.Foreground = Brushes.Blue;
 
             try
             {
@@ -121,7 +122,7 @@ namespace HireHub.Employers.Views
                     StackPanel stackPanel = new StackPanel();
                     stackPanel.Children.Add(rectangle);
                     stackPanel.Children.Add(stackPanelDetails);
-                    stackPanel.Margin = new Thickness(0, 10, 0, 0);
+                    stackPanel.Margin = new Thickness(0, 10, 0, 10);
                     
                     
                     

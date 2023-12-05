@@ -109,7 +109,7 @@ namespace HireHub
                 if (validCredentials)
                 {
                     //open homepage
-                    MessageBox.Show("Success");
+                   /* MessageBox.Show("Success");*/
                     if (login.UserType == "Job Seeker")
                     {
                         JobSeekerHomepage jobSeekerHomepage = new JobSeekerHomepage();

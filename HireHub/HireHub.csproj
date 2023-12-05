@@ -8,7 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Employers\Views\HireHub.jpg" />
     <None Remove="Employers\Views\profileLogo.png" />
+    <None Remove="HireHub.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,7 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Employers\Views\HireHub.jpg" />
     <Resource Include="Employers\Views\profileLogo.png" />
+    <Resource Include="HireHub.jpg" />
   </ItemGroup>
 
 </Project>
