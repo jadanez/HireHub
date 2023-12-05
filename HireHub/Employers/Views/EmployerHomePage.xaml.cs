@@ -1,5 +1,6 @@
 ﻿using HireHub.AllUsers.Models;
 using HireHub.Database.Queries;
+using HireHub.Employers.Models;
 using HireHub.JobSeekers;
 using System;
 using System.Collections.Generic;
@@ -46,8 +47,15 @@ namespace HireHub.Employers.Views
         //set profile Name
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-          
-            EmpProfileName.Content = empFirstName;
+
+            JobQueries getJobs = new JobQueries();
+            List<Job> myJobs = getJobs.GetMyJobs(userId);
+
+
+
+
+
+            /* EmpProfileName.Content = empFirstName;*/
 
         }
 
@@ -72,11 +80,22 @@ namespace HireHub.Employers.Views
         }
 
 
-        //Edit Profile
-        private void Profile_Click (object sender, MouseButtonEventArgs e)
-        {
 
-            MessageBox.Show("Edit Profile");
+
+
+
+        //Edit Profile
+        private void EmpProfileName_Click(object sender, RoutedEventArgs e)
+        {
+            //Edit Profile / Show
+            MessageBox.Show("Edit Profile Call");
+        }
+
+
+        private void Profile_Click(object sender, RoutedEventArgs e)
+        {
+            //Edit Profile / Show
+            MessageBox.Show("Edit Profile Call: Image");
         }
     }
 }
