@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -107,7 +108,7 @@ namespace HireHub.Employers.Views
                     btnSeeApplicants.HorizontalAlignment = HorizontalAlignment.Right;
                     btnSeeApplicants.Name = "btnJob" + job.jobId.ToString();
                     btnSeeApplicants.Margin = new Thickness(10, 10, 10, 10);
-
+                    btnSeeApplicants.Click += (sender, e) => See_Applicants_Click(btnSeeApplicants.Name);
 
 
 
@@ -162,6 +163,16 @@ namespace HireHub.Employers.Views
             MessageBox.Show("Your jobs!");
         }
 
+
+        private void See_Applicants_Click(string buttonName)
+        {
+
+            MessageBox.Show($"Button '{buttonName}' clicked!");
+            EmployerSeeApplicants seeApplicants = new EmployerSeeApplicants(buttonName);
+            this.Visibility = Visibility.Hidden;
+            seeApplicants.Show();
+
+        }
 
 
 
