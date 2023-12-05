@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace HireHub.Common
 {
-    class SignUpFormConstants
+    class AccountFormConstants
     {
         public static string InValidForm = "Invalid form data";
         public static string AccountAdded = "Account added";
+        public static string AccountUpdated = "Account updated";
         public static string Failure = "Failure";
         public static string WelcomeMessage = "Welcome ";
         public static string FailedToAddAccount = "Something went wrong. Failed to add account. Please try again later!";
