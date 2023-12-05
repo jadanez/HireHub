@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace HireHub.Database.Queries
 {
@@ -117,6 +118,66 @@ namespace HireHub.Database.Queries
             }
 
         }
+
+        public async Task<List<Job>> GetMyJobs(long empId)
+        {
+             List<Job> myJobs = new List<Job>();
+
+            try
+            {
+                string selectQuery = $"Select * FROM Job j WHERE j.employerID = '{empId}'";
+
+                connection.Open();
+                SqlCommand cmd = new SqlCommand(selectQuery, connection);
+                SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+                while (reader.Read())
+                {
+                    Job job = new Job();
+                    job.jobId = reader.GetInt32(reader.GetOrdinal("jobId"));
+                    job.roleName = reader.GetString(reader.GetOrdinal("roleName"));
+                    job.jobDetails = reader.GetString(reader.GetOrdinal("jobDetails"));
+                    job.jobType = reader.GetString(reader.GetOrdinal("jobType"));
+                    job.experienceLevel = reader.GetString(reader.GetOrdinal("experienceLevel"));
+                    job.jobStatus = reader.GetString(reader.GetOrdinal("jobStatus"));
+                    job.hiringManager = reader.GetString(reader.GetOrdinal("hiringManager"));
+                    job.salary = reader.GetDecimal(reader.GetOrdinal("salary"));
+                    job.companyName = reader.GetString(reader.GetOrdinal("companyName"));
+                   
+                    myJobs.Add(job);
+
+                }
+
+
+
+                connection.Close();
+
+
+
+
+
+               
+
+
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+
+
+            }
+
+
+
+
+
+            return myJobs;
+
+
+        }
+
+
 
     }
 }
