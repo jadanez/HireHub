@@ -1,4 +1,8 @@
-﻿using System;
+﻿using HireHub.Common;
+using HireHub.Common.Models;
+using HireHub.Database.Queries;
+using HireHub.JobSeekers.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,6 +35,8 @@ namespace HireHub.JobSeekers.Views
 
         private void InitializeViewValues()
         {
+            string[] employementStatus = { "Contract Employee", "Full-Time Employee", "Intern or Apprentice", "Part-Time Employee", "Self-Employed", "Temporary or Seasonal Employee", "Unemployed", "Volunteer" };
+            EmploymentStatusCombo.ItemsSource = employementStatus.ToList();
 
         }
         private async void SaveProfileDetailsBtn_Click(object sender, RoutedEventArgs e)
@@ -39,7 +45,54 @@ namespace HireHub.JobSeekers.Views
         }
         private async void SaveAccountDetailsBtn_Click(object sender, RoutedEventArgs e)
         {
+            // Account
+            FormErrorMessages formErrorMessages = ValidateAccountFields();
+            if (formErrorMessages != null)
+            {
+                if (formErrorMessages.isFormValid)
+                {
+                    AccountQueries accountQueries = new AccountQueries();
+                    AccountModel accountModel = new AccountModel()
+                    {
+                        FirstName = FirstNameTxtBox.Text,
+                        LastName = LastNameTxtBox.Text,
+                        Email = EmailTxtBox.Text,
+                        Phone = PhoneTxtBox.Text
+                    };
+                    bool isSuccess = await accountQueries.UpdateUserNameAndContactDetails(accountModel, userEmailId);
+                }
+                else
+                {
+                    MessageBox.Show(formErrorMessages.errorMessage, AccountFormConstants.InValidForm, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
 
+        private FormErrorMessages ValidateAccountFields()
+        {
+            FormErrorMessages formErrorMessages = new FormErrorMessages();
+            formErrorMessages.isFormValid = true;
+            if (!FieldValidators.AreAlphabets(FirstNameTxtBox.Text))
+            {
+                formErrorMessages.isFormValid = false;
+                formErrorMessages.errorMessage = AccountFormConstants.InValidFirstName;
+            }
+            if (!FieldValidators.AreAlphabets(LastNameTxtBox.Text))
+            {
+                formErrorMessages.isFormValid = false;
+                formErrorMessages.errorMessage = AccountFormConstants.InValidLastName;
+            }
+            if (!FieldValidators.IsMailValid(EmailTxtBox.Text))
+            {
+                formErrorMessages.isFormValid = false;
+                formErrorMessages.errorMessage = AccountFormConstants.InValidEmailName;
+            }
+            if (!FieldValidators.IsPhoneNumberValid(PhoneTxtBox.Text))
+            {
+                formErrorMessages.isFormValid = false;
+                formErrorMessages.errorMessage = AccountFormConstants.InValidPhoneName;
+            }
+            return formErrorMessages;
         }
     }
 }

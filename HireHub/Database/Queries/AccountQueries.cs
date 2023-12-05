@@ -1,4 +1,5 @@
 ﻿using HireHub.AllUsers.Models;
+using HireHub.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -114,6 +115,73 @@ namespace HireHub.Database.Queries
             {
                 return 0;
             }
+        }
+        // get Account Details by emailID
+        public async Task<AccountModel> GetUserAccountDetails(string emailId)
+        {
+            AccountModel account = null;
+            try
+            {
+                string selectQuery = $"Select * FROM Account ac WHERE ac.email = '{emailId}'";
+
+                connection.Open();
+                SqlCommand cmd = new SqlCommand(selectQuery, connection);
+                await cmd.ExecuteNonQueryAsync();
+                DataTable dt = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+                string userAccountIdString = dt.Rows[0]["accountId"].ToString();
+                string userFirstNameString = dt.Rows[0]["firstName"].ToString();
+                string userLastNameString = dt.Rows[0]["lastName"].ToString();
+                string userEmailString = dt.Rows[0]["email"].ToString();
+                string userPhoneNumberString = dt.Rows[0]["phoneNumber"].ToString();
+                string userType = dt.Rows[0]["userType"].ToString();
+                int userId;
+                if (int.TryParse(userAccountIdString, out int Id))
+                {
+                    userId = Id;
+                }
+                else
+                {
+                    userId = 0;
+                }
+                account = new AccountModel()
+                {
+                    AccountID = userId,
+                    FirstName = userFirstNameString,
+                    LastName = userLastNameString,
+                    Email = userEmailString,
+                    Phone = userPhoneNumberString,
+                    UserType = userType
+                };
+                return account;
+            }
+            catch (Exception ex)
+            {
+                return account;
+            }
+        }
+        public async Task<bool> UpdateUserNameAndContactDetails(AccountModel accountModel, string emailID)
+        {
+            try
+            {
+                connection.Open();
+
+                string updateQuery = $"UPDATE ACCOUNT SET firstName='{accountModel.FirstName}', lastName='{accountModel.LastName}', email='{accountModel.Email}', phoneNumber='{accountModel.Phone}' where email='{emailID}'";
+
+                SqlCommand cmd = new SqlCommand(updateQuery, connection);
+
+                int rowAffected = (int)await cmd.ExecuteNonQueryAsync();
+                connection.Close();
+
+                ////Updated
+                return (rowAffected > 0);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
         }
     }
 }

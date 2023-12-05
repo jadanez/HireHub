@@ -75,7 +75,7 @@ namespace HireHub.JobSeekers.Views
                 }
                 else
                 {
-                    MessageBox.Show(formErrorMessages.errorMessage, SignUpFormConstants.InValidForm, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(formErrorMessages.errorMessage, AccountFormConstants.InValidForm, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
