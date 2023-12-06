@@ -24,84 +24,56 @@ namespace HireHub.JobSeekers.Views
     /// </summary>
     public partial class JobSeekerHomepage : Window
     {
-         private readonly JobSeekerHomePageModel jobSeekerHomePageModel;
+        private readonly JobSeekerHomePageModel jobSeekerHomePageModel;
         public JobSeekerHomepage()
         {
             InitializeComponent();
 
             this.jobSeekerHomePageModel = new JobSeekerHomePageModel();
-           WindowOnLoad();
-    
+            WindowOnLoad();
+
             this.DataContext = this.jobSeekerHomePageModel;
         }
-
-        public static List<JobDetail> searchResult;
         private async void WindowOnLoad()
         {
             Debug.WriteLine("Entered onLoad debug");
             Trace.WriteLine("Entered onLoad trace");
             JobQueries jobQuery = new JobQueries();
-            await jobQuery.SearchJob("Generic");
-            Debug.WriteLine("Back to line 46: " + searchResult.Count);
 
-            if (searchResult.Count == 0)
+            List<JobDetailModel> onLoadSearchResult = await jobQuery.SearchJob_All_Or_ByRoleName("Generic");
+            Debug.WriteLine("Back to line 46: " + onLoadSearchResult.Count);
+
+            if (onLoadSearchResult.Count == 0)
             {
                 MessageBox.Show("No results matching the search! Please try another keyword", "No results matching the search! Please try another keyword", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
-                for (int i=0;i<4;i++)
+                for (int i = 0; i < 4; i++)
                 {
-                    Debug.WriteLine("roleName" +i+ searchResult[i].roleName);
+                    Debug.WriteLine("roleName" + i + onLoadSearchResult[i].roleName);
                 }
-                this.jobSeekerHomePageModel.jobDetails = searchResult;
+                this.jobSeekerHomePageModel.jobDetails = onLoadSearchResult;
                 this.DataContext = null;
                 this.DataContext = this.jobSeekerHomePageModel;
             }
-            //List<JobDetail> fetchedResult = jobQuery.SearchJob("Generic");
-            //if (fetchedResult != null)
-            //{
-            //    Debug.WriteLine("set value debug");
-            //    Trace.WriteLine("set value trace");
-            //    this.jobSeekerHomePageModel.jobDetails = fetchedResult;
-            //}
         }
 
-        
-        private  void SeeDetailsBtn_Click(object sender, RoutedEventArgs e)
+
+        private void SeeDetailsBtn_Click(object sender, RoutedEventArgs e)
         {
-            FormErrorMessages formErrorMessages = GetAllFieldValues();
-            if (formErrorMessages != null)
-            {
-                if (formErrorMessages.isFormValid)
-                {
-                    JobQueries jobQuery = new JobQueries();
-                    JobSeekerHomePageModel jobSeekerHomePageModel = new JobSeekerHomePageModel()
-                    {
-                        searchString = SearchBox.Text
-                    };
+            int clickedButtonUId = Convert.ToInt32(((Button)sender).Uid);
 
-                    jobQuery.SearchJob(jobSeekerHomePageModel.searchString);
-                    //searchResult = jobQuery.SearchJob(jobSeekerHomePageModel.searchString);
 
-                    Debug.WriteLine("Back to line 71: " + searchResult.Count);
-                    if (searchResult == null)
-                    {
-                        MessageBox.Show("No results matching the search! Please try another keyword", "No results matching the search! Please try another keyword", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                    else
-                    {
-                        // Navigate to Specific job page
-                        this.jobSeekerHomePageModel.jobDetails = searchResult;
-                    }
-                }
-                else
-                {
-                    MessageBox.Show(formErrorMessages.errorMessage, AccountFormConstants.InValidForm, MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
+            JobQueries jobQuery = new JobQueries();
+
+            JobSeekerJobDetailPage jobSeekerJobDetailPage = new JobSeekerJobDetailPage(clickedButtonUId);
+            this.Visibility = Visibility.Hidden;
+            jobSeekerJobDetailPage.Show();
+
+           Debug.WriteLine("Id of clicked btn is" + clickedButtonUId);
         }
-        private FormErrorMessages GetAllFieldValues()
+        private FormErrorMessages GetSearchString()
         {
             FormErrorMessages formErrorMessages = new FormErrorMessages();
             formErrorMessages.isFormValid = true;
@@ -116,10 +88,10 @@ namespace HireHub.JobSeekers.Views
             return formErrorMessages;
         }
 
-        private async void SearchBtn_Click(object sender, RoutedEventArgs e)
+        internal async void SearchBtn_Click(object sender, RoutedEventArgs e)
         {
-           Debug.WriteLine("Entered Search Click");
-            FormErrorMessages formErrorMessages = GetAllFieldValues();
+            Debug.WriteLine("Entered Search Click");
+            FormErrorMessages formErrorMessages = GetSearchString();
             if (formErrorMessages != null)
             {
                 if (formErrorMessages.isFormValid)
@@ -133,28 +105,27 @@ namespace HireHub.JobSeekers.Views
                     try
                     {
                         //searchResult = jobQuery.SearchJob(jobSeekerHomePageModel.searchString);
-                        await jobQuery.SearchJob(jobSeekerHomePageModel.searchString);
+                        List<JobDetailModel> onSearchSearchResult = await jobQuery.SearchJob_All_Or_ByRoleName(jobSeekerHomePageModel.searchString);
 
-                        Debug.WriteLine("Back to line 122: " + searchResult.Count);
-                        if (searchResult.Count == 0)
+                        Debug.WriteLine("Back to line 122: " + onSearchSearchResult.Count);
+                        if (onSearchSearchResult.Count == 0)
                         {
                             MessageBox.Show("No results matching the search! Please try another keyword", "No results matching the search! Please try another keyword", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                         else
                         {
-                            this.jobSeekerHomePageModel.jobDetails = new List<JobDetail>();
-                            this.jobSeekerHomePageModel.jobDetails = searchResult;
+                            this.jobSeekerHomePageModel.jobDetails = new List<JobDetailModel>(onSearchSearchResult);
 
                             this.DataContext = null;
                             this.DataContext = this.jobSeekerHomePageModel;
                         }
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message, ex.Message , MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show(ex.Message, ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
                     }
 
-                   
+
                 }
                 else
                 {
@@ -162,8 +133,6 @@ namespace HireHub.JobSeekers.Views
                 }
             }
         }
-
-        // Navigate to Specific job page - yet to implement
     }
 }
 
