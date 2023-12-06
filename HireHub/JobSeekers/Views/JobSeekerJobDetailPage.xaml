@@ -135,7 +135,7 @@
             </StackPanel>
 
             <StackPanel Grid.Column="2">
-                <Button Click="JobSeekerEditProfileClick" Width="55">
+                <Button Cursor="Hand" Click="JobSeekerEditProfileClick" Width="55">
                     <Button.Template>
                         <ControlTemplate>
                 <Ellipse Margin="0,10,10,10" Stroke="Black"  Height="35"  Width="35" HorizontalAlignment="Right">
