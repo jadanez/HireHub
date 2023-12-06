@@ -27,9 +27,9 @@ namespace HireHub.JobSeekers.Views
         AccountQueries accountQueries;
         ProfileQueries profileQueries;
         bool isProfileExist;
-        public JobSeekerEditProfile(long userId, string userEmailId)
+        public JobSeekerEditProfile(string userEmailId)
         {
-            this.userId = userId;
+
             this.userEmailId = userEmailId;
             accountQueries = new AccountQueries();
             profileQueries = new ProfileQueries();
@@ -47,7 +47,7 @@ namespace HireHub.JobSeekers.Views
             LastNameTxtBox.Text = accountModel.LastName;
             EmailTxtBox.Text = accountModel.Email;
             PhoneTxtBox.Text = accountModel.Phone;
-
+            userId = accountModel.AccountID;
             isProfileExist = await profileQueries.IsProfileExist(userId);
             if (isProfileExist)
             {
