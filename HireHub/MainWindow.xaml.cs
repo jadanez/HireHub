@@ -61,7 +61,7 @@ namespace HireHub
             if (!FieldValidators.IsMailValid(emailLogin))
             {
                 formErrorMessages.isFormValid = false;
-                formErrorMessages.errorMessage = SignUpFormConstants.InValidEmailName;         
+                formErrorMessages.errorMessage = AccountFormConstants.InValidEmailName;         
                 
             }
 
@@ -112,7 +112,7 @@ namespace HireHub
                 if (validCredentials)
                 {
                     //open homepage
-                    MessageBox.Show("Success");
+                   /* MessageBox.Show("Success");*/
                     if (login.UserType == "Job Seeker")
                     {
                         JobSeekerHomepage jobSeekerHomepage = new JobSeekerHomepage();
@@ -122,7 +122,7 @@ namespace HireHub
                     }
                     else
                     {
-                        EmployerHomePage employerHomePage = new EmployerHomePage();
+                        EmployerHomePage employerHomePage = new EmployerHomePage(login.EmailAddress, login.UserType);
                         this.Visibility = Visibility.Hidden;
                         employerHomePage.Show();
                     }

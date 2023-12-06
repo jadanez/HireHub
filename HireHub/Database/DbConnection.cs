@@ -8,6 +8,6 @@ namespace HireHub.Database
 {
     public class DatabaseConnection
     {
-        public static string dbConnectionString = "Data Source=LAPTOP-NN27E3IQ\\SQLEXPRESS19;Initial Catalog=HireHub;Integrated Security=True";
+        public static string dbConnectionString = "Data Source=MEGAMIND\\SQLEXPRESS;Initial Catalog=HireHub;Integrated Security=True";
     }
 }

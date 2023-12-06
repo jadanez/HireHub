@@ -11,6 +11,9 @@
     <None Remove="Common\Images\avatar.png" />
     <None Remove="Common\Images\profileLogo.png" />
     <None Remove="Common\Images\TeamWall.jpg" />
+    <None Remove="Employers\Views\HireHub.jpg" />
+    <None Remove="Employers\Views\profileLogo.png" />
+    <None Remove="HireHub.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +24,12 @@
     <Resource Include="Common\Images\avatar.png" />
     <Resource Include="Common\Images\profileLogo.png" />
     <Resource Include="Common\Images\TeamWall.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Employers\Views\HireHub.jpg" />
+    <Resource Include="Employers\Views\profileLogo.png" />
+    <Resource Include="HireHub.jpg" />
   </ItemGroup>
 
 </Project>

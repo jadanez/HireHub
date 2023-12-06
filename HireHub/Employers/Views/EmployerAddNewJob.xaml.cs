@@ -105,7 +105,7 @@ namespace HireHub.Employers.Views
                 JobType = JobTypeCombo.SelectedItem.ToString(),
                 ExperienceLevel = ExperienceCombo.SelectedItem.ToString(),
                 JobDetails = DescriptionTextBox.Text,
-                Salary = int.Parse(SalaryTextBox.Text),
+                Salary = double.Parse(SalaryTextBox.Text),
                 HiringManager = ContactTextBox.Text,
                 JobLocation = LocationTextBox.Text,
                 EmployerId = userId,
@@ -124,7 +124,7 @@ namespace HireHub.Employers.Views
                 formErrorMessage.errorMessage = EmployerAddAJobConstants.InValidSalary;
                 return formErrorMessage;
             }
-            if (!FieldValidators.IsNumeric(SalaryTextBox.Text))
+            if (!FieldValidators.IsDecimalNumber(SalaryTextBox.Text))
             {
                 formErrorMessage.isFormValid = false;
                 formErrorMessage.errorMessage = EmployerAddAJobConstants.InValidSalary;

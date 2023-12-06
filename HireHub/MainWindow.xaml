@@ -5,20 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HireHub"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="HireHub - Login" Height="450" Width="500"
+        WindowStartupLocation="CenterScreen" Icon="/HireHub.jpg">
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF00FFBA" Offset="0.312"/>
+                <GradientStop Color="#FF005495" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="151*"/>
+            <ColumnDefinition Width="99*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="192*"/>
             <RowDefinition Height="25*"/>
         </Grid.RowDefinitions>
-        <Button Content="Signup" HorizontalAlignment="Left" Margin="416,292,0,0" VerticalAlignment="Top" Click="Button_Click" Height="54" Width="105"/>
-        <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="212,292,0,0" VerticalAlignment="Top" Height="54" Width="116" Click="Button_Click_1"/>
-        <TextBox x:Name="EmailAddressLogin" HorizontalAlignment="Left" Height="52" Margin="212,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="309" Text="john.doe@example.com"/>
-        <PasswordBox x:Name="PasswordLogin" HorizontalAlignment="Left" Height="46" Margin="212,188,0,0" VerticalAlignment="Top" Width="309" Password="securepassword"/>
-        <RadioButton x:Name="EmployerLogin" Content="Employer" HorizontalAlignment="Left" Margin="228,264,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="JobSeekerLogin" Content="Job Seeker" HorizontalAlignment="Left" Margin="389,264,0,0" VerticalAlignment="Top"/>
-        <Label Content="Email Address" HorizontalAlignment="Left" Margin="212,83,0,0" VerticalAlignment="Top"/>
-        <Label Content="Password" HorizontalAlignment="Left" Margin="212,162,0,0" VerticalAlignment="Top"/>
+        <Button Content="Signup" HorizontalAlignment="Left" Margin="256,322,0,0" VerticalAlignment="Top" Click="Button_Click" Height="35" Width="120" Grid.ColumnSpan="2"/>
+        <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="125,322,0,0" VerticalAlignment="Top" Height="35" Width="120" Click="Button_Click_1"/>
+        <TextBox x:Name="EmailAddressLogin" HorizontalAlignment="Left" Height="35" Margin="125,192,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Text="j@bwl.ca" Grid.ColumnSpan="2"/>
+        <PasswordBox x:Name="PasswordLogin" HorizontalAlignment="Left" Height="35" Margin="125,251,0,0" VerticalAlignment="Top" Width="250" Password="John@sample1" Grid.ColumnSpan="2"/>
+        <RadioButton x:Name="EmployerLogin" Content="Employer" HorizontalAlignment="Left" Margin="287,297,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <RadioButton x:Name="JobSeekerLogin" Content="Job Seeker" HorizontalAlignment="Left" Margin="197,297,0,0" VerticalAlignment="Top"/>
+        <Label Content="Email Address" HorizontalAlignment="Left" Margin="120,168,0,0" VerticalAlignment="Top"/>
+        <Label Content="Password" HorizontalAlignment="Center" Margin="0,227,0,0" VerticalAlignment="Top"/>
+        <Label Content="Login as:" HorizontalAlignment="Left" Margin="125,291,0,0" VerticalAlignment="Top"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="200,55,0,0" VerticalAlignment="Top" Width="100" Source="/HireHub.jpg"/>
 
     </Grid>
 </Window>
