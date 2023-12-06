@@ -34,6 +34,7 @@ namespace HireHub
             InitializeComponent();
         }
 
+        // If user clicks on sign up button
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             SignUpForm signUpForm = new SignUpForm();
@@ -41,6 +42,8 @@ namespace HireHub
             signUpForm.Show();
         }
 
+
+        // If user clicks on login button
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
 

@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace HireHub.JobSeekers.Models
 {
-    internal class JobSeekerHomePageModel
+    internal class SpecificJobPageModel
     {
-       
-        public IEnumerable<JobDetailModel>? jobDetails { get; set; }
-        public string searchString { get; set; }
+        public IEnumerable<JobDetailModel>? specificJobDetails { get; set; }
     }
 }
