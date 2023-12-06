@@ -71,9 +71,9 @@ namespace HireHub.JobSeekers
                                 }
                                 else
                                 {
-                                    JobSeekerEditProfile jobSeekerEditProfile = new JobSeekerEditProfile(UserId, signUpModel.Email);
+                                    JobSeekerHomepage jobSeekerHomepage = new JobSeekerHomepage(signUpModel.Email);
                                     this.Visibility = Visibility.Hidden;
-                                    jobSeekerEditProfile.Show();
+                                    jobSeekerHomepage.Show();
                                 }
 
                             }

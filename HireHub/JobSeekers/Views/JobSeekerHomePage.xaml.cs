@@ -25,7 +25,8 @@ namespace HireHub.JobSeekers.Views
     public partial class JobSeekerHomepage : Window
     {
         private readonly JobSeekerHomePageModel jobSeekerHomePageModel;
-        public JobSeekerHomepage()
+        private string userEmailID;
+        public JobSeekerHomepage(string userEmailID)
         {
             InitializeComponent();
 
@@ -33,6 +34,7 @@ namespace HireHub.JobSeekers.Views
             WindowOnLoad();
 
             this.DataContext = this.jobSeekerHomePageModel;
+            this.userEmailID = userEmailID;
         }
         private async void WindowOnLoad()
         {
@@ -67,11 +69,11 @@ namespace HireHub.JobSeekers.Views
 
             JobQueries jobQuery = new JobQueries();
 
-            JobSeekerJobDetailPage jobSeekerJobDetailPage = new JobSeekerJobDetailPage(clickedButtonUId);
+            JobSeekerJobDetailPage jobSeekerJobDetailPage = new JobSeekerJobDetailPage(clickedButtonUId, userEmailID);
             this.Visibility = Visibility.Hidden;
             jobSeekerJobDetailPage.Show();
 
-           Debug.WriteLine("Id of clicked btn is" + clickedButtonUId);
+            Debug.WriteLine("Id of clicked btn is" + clickedButtonUId);
         }
         private FormErrorMessages GetSearchString()
         {
@@ -132,6 +134,12 @@ namespace HireHub.JobSeekers.Views
                     MessageBox.Show(formErrorMessages.errorMessage, AccountFormConstants.InValidForm, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        }
+        public void JobSeekerEditProfileClick(object sender, EventArgs e)
+        {
+            JobSeekerEditProfile employerHomePage = new JobSeekerEditProfile(userEmailID);
+            this.Visibility = Visibility.Hidden;
+            employerHomePage.Show();
         }
     }
 }
