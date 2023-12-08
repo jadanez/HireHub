@@ -214,15 +214,8 @@ namespace HireHub.Database.Queries
 
                 }
 
-
-
                 connection.Close();
 
-
-
-
-
-               
 
 
 
@@ -230,13 +223,7 @@ namespace HireHub.Database.Queries
             catch(Exception ex)
             {
                 MessageBox.Show($"An error occurred: {ex.Message}");
-
-
             }
-
-
-
-
 
             return myJobs;
 

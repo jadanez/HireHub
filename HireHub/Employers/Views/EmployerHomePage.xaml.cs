@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -27,7 +28,7 @@ namespace HireHub.Employers.Views
         public string empLastName;
         public string empEmail;
         public long userId;
-
+        public string userType;
 
         public EmployerHomePage(string emailAddress, string userType)
         {
@@ -38,7 +39,7 @@ namespace HireHub.Employers.Views
             this.empLastName = accountDetails.LastName;
             this.empEmail = accountDetails.Email;
             this.userId = accountDetails.AccountId;
-
+            this.userType = userType;
             InitializeComponent();
             
 
@@ -107,7 +108,7 @@ namespace HireHub.Employers.Views
                     btnSeeApplicants.HorizontalAlignment = HorizontalAlignment.Right;
                     btnSeeApplicants.Name = "btnJob" + job.jobId.ToString();
                     btnSeeApplicants.Margin = new Thickness(10, 10, 10, 10);
-
+                    btnSeeApplicants.Click += (sender, e) => See_Applicants_Click(btnSeeApplicants.Name);
 
 
 
@@ -159,9 +160,19 @@ namespace HireHub.Employers.Views
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
 
-            MessageBox.Show("Your jobs!");
+           /* MessageBox.Show("Your jobs!");*/
         }
 
+
+        private void See_Applicants_Click(string btnName)
+        {
+
+           /* MessageBox.Show($"Button '{btnName}' clicked!");*/
+            EmployerSeeApplicants seeApplicants = new EmployerSeeApplicants(btnName,  empFirstName,  empLastName,  empEmail,  userId,  userType);
+            this.Visibility = Visibility.Hidden;
+            seeApplicants.Show();
+
+        }
 
 
 

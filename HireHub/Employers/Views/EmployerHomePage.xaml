@@ -10,7 +10,7 @@
         ContentRendered="Window_ContentRendered" Icon="/Employers/Views/HireHub.jpg" >
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <Grid>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
         <Grid.RowDefinitions>
             <RowDefinition Height="143*"/>
             <RowDefinition Height="291*"/>
