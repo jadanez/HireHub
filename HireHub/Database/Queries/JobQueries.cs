@@ -8,6 +8,7 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -41,20 +42,20 @@ namespace HireHub.Database.Queries
                 return false;
             }
         }
-        public async Task<bool> SearchJob(string searchString)
+        internal async Task<List<JobDetailModel>> SearchJob_All_Or_ByRoleName(string searchString)
         {
-            List<JobDetail> jobDetails = new List<JobDetail>();
+            List<JobDetailModel> jobDetails = new List<JobDetailModel>();
 
             SqlCommand cmd;
             if (String.IsNullOrEmpty(searchString) || searchString == "Generic")
             {
-               string  searchStringGeneric = $"SELECT * from Job";
+                string searchStringGeneric = $"SELECT * from Job";
                 cmd = new SqlCommand(searchStringGeneric, connection);
                 Debug.WriteLine("SQL SEARCH STRING IF:" + searchStringGeneric);
             }
             else
             {
-               string selectQueryBasedOnSearchString = $"SELECT * from Job jobInstance where jobInstance.roleName LIKE '%{searchString}%'";
+                string selectQueryBasedOnSearchString = $"SELECT * from Job jobInstance where jobInstance.roleName LIKE '%{searchString}%'";
                 cmd = new SqlCommand(selectQueryBasedOnSearchString, connection);
                 Debug.WriteLine("SQL SEARCH STRING ELSE:" + selectQueryBasedOnSearchString);
             }
@@ -74,10 +75,10 @@ namespace HireHub.Database.Queries
                     else
                     {
                         Debug.WriteLine("In else");
-                        while ( await reader.ReadAsync())
+                        while (await reader.ReadAsync())
                         {
                             Debug.WriteLine("Reading ++");
-                            JobDetail jobDetail = new JobDetail();
+                            JobDetailModel jobDetail = new JobDetailModel();
 
                             jobDetail.roleName = reader["roleName"].ToString();
                             jobDetail.jobDetails = reader["jobDetails"].ToString();
@@ -86,8 +87,9 @@ namespace HireHub.Database.Queries
                             jobDetail.experienceLevel = reader["experienceLevel"].ToString();
                             jobDetail.jobStatus = reader["jobStatus"].ToString();
                             jobDetail.hiringManager = reader["hiringManager"].ToString();
-                            jobDetail.salary = Convert.ToDecimal(reader["salary"]);
+                            jobDetail.salary = "$ " + Convert.ToDecimal(reader["salary"]) + " a year";
                             jobDetail.companyName = reader["companyName"].ToString();
+                            jobDetail.jobLocation = reader["jobLocation"].ToString();
 
                             jobDetails.Add(jobDetail);
 
@@ -99,24 +101,88 @@ namespace HireHub.Database.Queries
 
                         reader.Close();
                         Debug.WriteLine("Reader close");
-                        JobSeekerHomepage.searchResult = jobDetails;
+                        //JobSeekerHomepage.searchResult = jobDetails;
 
-                        int rowsAffected = (int)reader.RecordsAffected;
+                       // int rowsAffected = (int)reader.RecordsAffected;
 
-                        return (rowsAffected>0);
+                        return jobDetails;
                     }
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
-                return false;
+                return null;
             }
             finally
             {
                 connection.Close();
             }
 
+        }
+
+        internal async Task<List<JobDetailModel>> SearchJob_ByJobId(int jobId)
+        {
+            List<JobDetailModel> jobDetails = new List<JobDetailModel>();
+
+            string selectQuery = $"SELECT TOP 1 * from Job jobInstance where jobInstance.jobId = {jobId}";
+            SqlCommand cmd = new SqlCommand(selectQuery, connection);
+            Debug.WriteLine("SQL SEARCH STRING:" + selectQuery);
+
+            try
+            {
+                await connection.OpenAsync();
+                cmd.CommandTimeout = 100000;
+                using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                {
+                    Debug.WriteLine("Entered try, executed reader");
+                    if (reader == null)
+                    {
+                        Debug.WriteLine("Reader is null");
+                        throw new Exception("Something went wrong while performing search. Contact your administrator.");
+                    }
+                    else
+                    {
+                        Debug.WriteLine("In else");
+                        while (await reader.ReadAsync())
+                        {
+                            Debug.WriteLine("Reading ++");
+                            JobDetailModel jobDetail = new JobDetailModel();
+
+                            jobDetail.roleName = reader["roleName"].ToString();
+                            jobDetail.jobDetails = reader["jobDetails"].ToString();
+                            jobDetail.jobId = Convert.ToInt32(reader["jobId"]);
+                            jobDetail.jobType = reader["jobType"].ToString();
+                            jobDetail.experienceLevel = reader["experienceLevel"].ToString();
+                            jobDetail.jobStatus = reader["jobStatus"].ToString();
+                            jobDetail.hiringManager = reader["hiringManager"].ToString();
+                            jobDetail.salary = "$ " + Convert.ToDecimal(reader["salary"]) + " a year";
+                            jobDetail.companyName = reader["companyName"].ToString();
+                            jobDetail.jobLocation = reader["jobLocation"].ToString();
+
+                            jobDetails.Add(jobDetail);
+
+                            Debug.WriteLine("Job Id " + jobDetail.jobId);
+                            Debug.WriteLine("Role Name " + jobDetail.roleName);
+                            Debug.WriteLine("Job Details " + jobDetail.jobDetails);
+                        }
+                        reader.NextResult();
+
+                        reader.Close();
+                        Debug.WriteLine("Reader close");
+                        return jobDetails;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                return null;
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
 
         public async Task<List<Job>> GetMyJobs(long empId)
@@ -163,7 +229,6 @@ namespace HireHub.Database.Queries
 
 
         }
-
 
     }
 }

@@ -34,6 +34,7 @@ namespace HireHub
             InitializeComponent();
         }
 
+        // If user clicks on sign up button
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             SignUpForm signUpForm = new SignUpForm();
@@ -41,6 +42,8 @@ namespace HireHub
             signUpForm.Show();
         }
 
+
+        // If user clicks on login button
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
 
@@ -58,18 +61,18 @@ namespace HireHub
             if (!FieldValidators.IsMailValid(emailLogin))
             {
                 formErrorMessages.isFormValid = false;
-                formErrorMessages.errorMessage = AccountFormConstants.InValidEmailName;         
-                
+                formErrorMessages.errorMessage = AccountFormConstants.InValidEmailName;
+
             }
 
             //check password
 
             if (String.IsNullOrEmpty(passwordLogin))
             {
-               
+
                 formErrorMessages.isFormValid = false;
                 formErrorMessages.errorMessage += "\n Missing password.";
-               
+
             }
 
 
@@ -109,10 +112,10 @@ namespace HireHub
                 if (validCredentials)
                 {
                     //open homepage
-                   /* MessageBox.Show("Success");*/
+                    /* MessageBox.Show("Success");*/
                     if (login.UserType == "Job Seeker")
                     {
-                        JobSeekerHomepage jobSeekerHomepage = new JobSeekerHomepage();
+                        JobSeekerHomepage jobSeekerHomepage = new JobSeekerHomepage(login.EmailAddress);
                         this.Visibility = Visibility.Hidden;
                         jobSeekerHomepage.Show();
 
@@ -125,18 +128,18 @@ namespace HireHub
                     }
 
                     //reset values of inputs
-                    
-                   /* EmailAddressLogin.Text = null;
-                    PasswordLogin.Password = null;
-                    EmployerLogin.IsChecked = false;
-                    JobSeekerLogin.IsChecked = false;*/
+
+                    /* EmailAddressLogin.Text = null;
+                     PasswordLogin.Password = null;
+                     EmployerLogin.IsChecked = false;
+                     JobSeekerLogin.IsChecked = false;*/
 
 
 
                 }
                 else
                 {
-                    
+
                     MessageBox.Show("Invalid Credentials");
                 }
 
