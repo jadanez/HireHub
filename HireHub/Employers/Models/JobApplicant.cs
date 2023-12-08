@@ -12,6 +12,8 @@ namespace HireHub.Employers.Models
         public long ApplicantId { get; set; }
         public string ApplicantName { get; set; }
         public decimal ExpectedSalary { get; set; }
-       
+        public string ApplicantButtonName => $"btnApplicantId{ApplicantId}";
+
+
     }
 }

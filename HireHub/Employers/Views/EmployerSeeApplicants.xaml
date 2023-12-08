@@ -20,6 +20,22 @@
         <Button x:Name="EmpProfileName" Content="Your Name" HorizontalAlignment="Left" Margin="431,26,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Click="EmpProfileName_Click" Width="76"/>
 
         <StackPanel x:Name="Applicants" Margin="0,65,0,0" Grid.RowSpan="2"/>
+        <Grid>
+            <DataGrid x:Name="applicantDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding}" Margin="10,79,10,-59" CanUserResizeColumns="False" CanUserAddRows="False" MaxWidth="600">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Applicant ID" Binding="{Binding ApplicantId}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Applicant Name" Binding="{Binding ApplicantName}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Expected Salary" Binding="{Binding ExpectedSalary}" Width="*" IsReadOnly="True"/>
+                    <DataGridTemplateColumn Header="Decision" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Approve" Click="ApproveButtonClick" Loaded="Button_Loaded"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
 
     </Grid>
 

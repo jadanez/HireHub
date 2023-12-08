@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -61,7 +62,32 @@ namespace HireHub.Database.Queries
         }
 
 
+        public async Task<bool> UpdateStatus(long ApplicantID, string status)
+        {
+            
+            try
+            {
+                string updateData = $"UPDATE Applicant\r\nSET applicantStatus = '{status}'\r\nWHERE applicantID = {ApplicantID};";
 
+                connection.Open();
+                SqlCommand cmd = new SqlCommand(updateData, connection);
+                int rowsAffected = await cmd.ExecuteNonQueryAsync();
+
+                connection.Close();
+
+
+                return(rowsAffected > 0 ? true : false);
+
+
+            }
+            catch(Exception  ex){
+                MessageBox.Show($"An error occurred: {ex.Message}");
+                return false;
+            }
+
+
+            
+        }
 
 
 
