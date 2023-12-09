@@ -28,17 +28,22 @@ namespace HireHub.Employers.Views
         public string empFirstName;
         public string empLastName;
         public string empEmail;
-        public long userId;
+        public string jobName;
+        public long  userId;
         public string userType;
         public long jobId;
 
 
 
-        public EmployerSeeApplicants(string btnName, string empFirstName, string empLastName, string empEmail, long userId, string userType)
+
+
+
+        public EmployerSeeApplicants(string btnName, string jobName, string empFirstName, string empLastName, string empEmail, long userId, string userType)
         {
             this.empFirstName = empFirstName;
             this.empLastName = empLastName;
             this.empEmail = empEmail;
+            this.jobName = jobName;
             this.userId = userId;
             this.userType = userType;
             this.jobId = long.Parse(btnName.Substring(6));
@@ -155,8 +160,11 @@ namespace HireHub.Employers.Views
                 // Set the data to the DataGrid
                 applicantDataGrid.ItemsSource = myApplicants;
 
+                JobName.Text = $"{jobName} (Job Id: {jobId})";
 
-               
+             
+
+
 
 
             }
@@ -174,16 +182,6 @@ namespace HireHub.Employers.Views
 
 
 
-
-
-        private Label CreateLabel(string text, int column, int row)
-        {
-            Label label = new Label();
-            label.Content = text;
-            Grid.SetColumn(label, column);
-            Grid.SetRow(label, row);
-            return label;
-        }
 
 
 
