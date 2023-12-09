@@ -108,7 +108,7 @@ namespace HireHub.Employers.Views
                     btnSeeApplicants.HorizontalAlignment = HorizontalAlignment.Right;
                     btnSeeApplicants.Name = "btnJob" + job.jobId.ToString();
                     btnSeeApplicants.Margin = new Thickness(10, 10, 10, 10);
-                    btnSeeApplicants.Click += (sender, e) => See_Applicants_Click(btnSeeApplicants.Name);
+                    btnSeeApplicants.Click += (sender, e) => See_Applicants_Click(btnSeeApplicants.Name, roleName.Text);
 
 
 
@@ -164,11 +164,11 @@ namespace HireHub.Employers.Views
         }
 
 
-        private void See_Applicants_Click(string btnName)
+        private void See_Applicants_Click(string btnName, string jobName)
         {
 
            /* MessageBox.Show($"Button '{btnName}' clicked!");*/
-            EmployerSeeApplicants seeApplicants = new EmployerSeeApplicants(btnName,  empFirstName,  empLastName,  empEmail,  userId,  userType);
+            EmployerSeeApplicants seeApplicants = new EmployerSeeApplicants(btnName, jobName,  empFirstName,  empLastName,  empEmail,  userId,  userType);
             this.Visibility = Visibility.Hidden;
             seeApplicants.Show();
 
