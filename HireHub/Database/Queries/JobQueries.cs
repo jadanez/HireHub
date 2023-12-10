@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection.PortableExecutable;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -178,6 +179,76 @@ namespace HireHub.Database.Queries
             {
                 Debug.WriteLine(ex.ToString());
                 return null;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public async Task<bool> AddApplicant(int profileId, int specificJobId)
+        {
+            try
+            {
+                connection.Open();
+                string insertQuery = $"INSERT INTO Applicant (profileId, jobId, applicantStatus) VALUES ({profileId}, {specificJobId}, 'Pending')";
+                Debug.WriteLine("insert query: "+insertQuery);
+
+                SqlCommand cmd = new SqlCommand(insertQuery, connection);
+
+                int rowAffected = (int)await cmd.ExecuteNonQueryAsync();
+                connection.Close();
+
+                ////Updated
+                return (rowAffected > 0);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public async Task<int> getProfileIdFromAccId(int accId)
+        {
+            List<JobDetailModel> jobDetails = new List<JobDetailModel>();
+
+            string selectQuery = $"SELECT TOP 1 profileId from profile p where p.accountId = {accId}";
+            SqlCommand cmd = new SqlCommand(selectQuery, connection);
+            Debug.WriteLine("SQL SEARCH STRING:" + selectQuery);
+
+            try
+            {
+                await connection.OpenAsync();
+                cmd.CommandTimeout = 100000;
+                using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                {
+                    Debug.WriteLine("Entered try, executed reader");
+                    if (reader == null)
+                    {
+                        Debug.WriteLine("Reader is null");
+                        throw new Exception("Something went wrong while performing search. Contact your administrator.");
+                    }
+                    else
+                    {
+                        Debug.WriteLine("In else");
+                        int profileId = 0;
+                        while (await reader.ReadAsync())
+                        {
+                            Debug.WriteLine("Reading ++");
+                           profileId = Convert.ToInt32(reader["profileId"]);
+                           
+                            Debug.WriteLine("Profile Id " + profileId);
+                        }
+                        reader.Close();
+                        Debug.WriteLine("Reader close");
+                        return profileId;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                return -1;
             }
             finally
             {
