@@ -1,4 +1,5 @@
-﻿using HireHub.Database.Queries;
+﻿using HireHub.Common.Models;
+using HireHub.Database.Queries;
 using HireHub.JobSeekers.Models;
 using System;
 using System.Collections.Generic;
@@ -25,10 +26,11 @@ namespace HireHub.JobSeekers.Views
     {
         private readonly SpecificJobPageModel specificJobPageModel;
         private readonly string userEmailID;
+        private readonly int specificJobId;
         public JobSeekerJobDetailPage(int jobId, string userEmailID)
         {
             InitializeComponent();
-
+            this.specificJobId = jobId;
             this.specificJobPageModel = new SpecificJobPageModel();
             WindowOnLoad(jobId);
             this.userEmailID = userEmailID;
@@ -108,14 +110,82 @@ namespace HireHub.JobSeekers.Views
 
                 });
             }, null, 2500, Timeout.Infinite);
-
-
-
         }
 
-        private void ApplyNowButton_Click(object sender, RoutedEventArgs e)
+        private void ShowErrorToast(string message)
         {
-            ShowSuccessToast("Successfully applied for the job !");
+            // Create a new TextBlock for the success message
+
+            SuccessMessageTextBlock.Text = message;
+            SuccessMessageTextBlock.Padding = new Thickness(10, 10, 10, 10);
+            SuccessMessageTextBlock.Background = Brushes.Red;
+            SuccessMessageTextBlock.Foreground = Brushes.White;
+            SuccessMessageTextBlock.FontWeight = FontWeights.Bold;
+            SuccessMessageTextBlock.FontSize = 14;
+            SuccessMessageTextBlock.HorizontalAlignment = HorizontalAlignment.Center;
+            SuccessMessageTextBlock.VerticalAlignment = VerticalAlignment.Center;
+
+            SuccessMessageBorder.Background = Brushes.Red;
+            SuccessMessageBorder.Margin = new Thickness(30, 10, 0, 10);
+            SearchBox.Visibility = Visibility.Hidden;
+            SuccessMessageTextBlock.Visibility = Visibility.Visible;
+
+
+            // Close the toast after a delay
+
+            var timer = new Timer(state =>
+            {
+                Application.Current.Dispatcher.Invoke(() => SuccessMessageTextBlock.Visibility = Visibility.Collapsed);
+
+                // Navigate to the JobSeekerHomePage
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    var jobSeekerHomePage = new JobSeekerHomepage(userEmailID);
+                    this.Visibility = Visibility.Hidden;
+                    jobSeekerHomePage.Show();
+
+                });
+            }, null, 2500, Timeout.Infinite);
+        }
+
+
+
+        private async void ApplyNowButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                AccountQueries accQuery = new AccountQueries();
+                long loggedInUserId = await accQuery.GetUserAccountId(userEmailID);
+
+                ProfileQueries profileQuery = new ProfileQueries();
+                ProfileModel profileModel = new ProfileModel();
+                profileModel = await profileQuery.GetUserProfileDetails(loggedInUserId);
+                if (profileModel != null)
+                {
+                    JobQueries jobQuery = new JobQueries();
+                    bool isApplicantAdded = (bool)await jobQuery.AddApplicant(Convert.ToInt32(profileModel.profileId), specificJobId);
+
+                    if (isApplicantAdded)
+                    {
+                        ShowSuccessToast("Successfully applied for the job !");
+
+                    }
+                    else
+                    {
+                        ShowErrorToast("Failed To Apply. Try again!");
+                    }
+                }
+                else
+                {
+                    ShowErrorToast("No Profile Found");
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed To Apply. Contact Your Admin!", "Failed To Apply. Contact Your Admin!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         public void JobSeekerEditProfileClick(object sender, EventArgs e)
         {
