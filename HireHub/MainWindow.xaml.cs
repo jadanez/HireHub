@@ -44,7 +44,7 @@ namespace HireHub
 
 
         // If user clicks on login button
-        private async void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
 
             FormErrorMessages formErrorMessages = new FormErrorMessages();
@@ -115,10 +115,7 @@ namespace HireHub
                    /* MessageBox.Show("Success");*/
                     if (login.UserType == "Job Seeker")
                     {
-                        AccountQueries accQuery = new AccountQueries();
                         JobSeekerHomepage jobSeekerHomepage = new JobSeekerHomepage();
-                        long userId = await accQuery.GetUserAccountId(emailLogin);
-                        jobSeekerHomepage.userProfileIcon.Tag = Convert.ToInt32(userId);
                         this.Visibility = Visibility.Hidden;
                         jobSeekerHomepage.Show();
 
