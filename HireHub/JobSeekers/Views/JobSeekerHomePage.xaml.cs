@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using HireHub.Database.Queries;
 using HireHub.Common.Models;
+using System.Reflection.Metadata;
 
 namespace HireHub.JobSeekers.Views
 {
@@ -60,18 +61,17 @@ namespace HireHub.JobSeekers.Views
         }
 
 
-        private void SeeDetailsBtn_Click(object sender, RoutedEventArgs e)
+        private async void SeeDetailsBtn_Click(object sender, RoutedEventArgs e)
         {
             int clickedButtonUId = Convert.ToInt32(((Button)sender).Uid);
-
-
-            JobQueries jobQuery = new JobQueries();
-
-            JobSeekerJobDetailPage jobSeekerJobDetailPage = new JobSeekerJobDetailPage(clickedButtonUId);
+            Debug.WriteLine("-- See Details Tag: " + Convert.ToInt32(userProfileIcon.Tag));
+            JobSeekerJobDetailPage jobSeekerJobDetailPage =  new JobSeekerJobDetailPage(clickedButtonUId, Convert.ToInt32(userProfileIcon.Tag));
+            jobSeekerJobDetailPage.userProfileIcon.Tag = (userProfileIcon.Tag).ToString();
             this.Visibility = Visibility.Hidden;
             jobSeekerJobDetailPage.Show();
 
            Debug.WriteLine("Id of clicked btn is" + clickedButtonUId);
+            
         }
         private FormErrorMessages GetSearchString()
         {
