@@ -181,6 +181,7 @@ namespace HireHub.JobSeekers.Views
                     bool isSuccess = await accountQueries.UpdateUserNameAndContactDetails(accountModel, userEmailId);
                     if (isSuccess)
                     {
+                        userEmailId = accountModel.Email;
                         MessageBox.Show(AccountFormConstants.AccountUpdated, AccountFormConstants.AccountUpdated, MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     else
