@@ -15,6 +15,7 @@
     <None Remove="Employers\Views\profileLogo.png" />
     <None Remove="HireHub.jpg" />
     <None Remove="JobSeekers\Views\avatar.png" />
+    <None Remove="JobSeekers\Views\HireHub.jpg" />
     <None Remove="JobSeekers\Views\TeamWall.jpg" />
   </ItemGroup>
 
@@ -33,6 +34,7 @@
     <Resource Include="Employers\Views\profileLogo.png" />
     <Resource Include="HireHub.jpg" />
     <Resource Include="JobSeekers\Views\avatar.png" />
+    <Resource Include="JobSeekers\Views\HireHub.jpg" />
     <Resource Include="JobSeekers\Views\TeamWall.jpg" />
   </ItemGroup>
 

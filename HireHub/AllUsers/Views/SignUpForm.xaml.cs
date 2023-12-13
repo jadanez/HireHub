@@ -46,7 +46,7 @@ namespace HireHub.JobSeekers
                         FirstName = FirstNameTxtBox.Text,
                         LastName = LastNameTxtBox.Text,
                         Phone = PhoneTxtBox.Text,
-                        Password = PasswordTxtBox.Text,
+                        Password = PasswordTxtBox.Password,
                         UserType = SignUpAsRBtnValue
 
                     };
@@ -93,7 +93,12 @@ namespace HireHub.JobSeekers
                 }
             }
         }
-
+        private void Back_BTN_Login(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow=new MainWindow();
+            this.Visibility = Visibility.Hidden;
+            mainWindow.Show();
+        }
         public async Task<long> GetUserId(string emailId)
         {
             long userAccountId = await accountQueries.GetUserAccountId(emailId);
@@ -133,14 +138,14 @@ namespace HireHub.JobSeekers
                 formErrorMessages.errorMessage = AccountFormConstants.InValidPhoneName;
                 return formErrorMessages;
             }
-            string password = PasswordTxtBox.Text;
+            string password = PasswordTxtBox.Password;
             if (!FieldValidators.IsPasswordValid(password))
             {
                 formErrorMessages.isFormValid = false;
                 formErrorMessages.errorMessage = AccountFormConstants.InValidPasswordName;
                 return formErrorMessages;
             }
-            string cPassword = CPasswordTxtBox.Text;
+            string cPassword = CPasswordTxtBox.Password;
             if (!FieldValidators.ConfirmPasswordMatched(cPassword, password))
             {
                 formErrorMessages.isFormValid = false;

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HireHub.Employers.Views"
         mc:Ignorable="d"
-        Title="EmployerAddNewJob" Height="800" Width="800"
+        Title="HireHub - Post New Job" Height="550" Width="800"
+        ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen" Icon="/HireHub.jpg">
 
     <Window.Resources>
@@ -47,6 +48,7 @@
                                 <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="TextElement.Foreground" TargetName="border" Value="black"/>
                                 <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
                             </Trigger>
@@ -146,7 +148,7 @@
         <Style x:Key="theComboBox" TargetType="{x:Type ComboBox}">
             <Setter Property="Foreground" Value="#333" />
             <Setter Property="BorderBrush" Value="Gray" />
-            <Setter Property="Background" Value="#D9D9D9" />
+            <Setter Property="Background" Value="White" />
             <Setter Property="SnapsToDevicePixels" Value="true"/>
             <Setter Property="OverridesDefaultStyle" Value="true"/>
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
@@ -266,8 +268,15 @@
             </Setter>
         </Style>
     </Window.Resources>
+    <ScrollViewer>
     <Grid>
-        <Label FontSize="20" Content="Your Jobs" HorizontalAlignment="Left" Margin="31,16,0,0" VerticalAlignment="Top"/>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF00FFBA" Offset="0.312"/>
+                <GradientStop Color="#FF005495" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Label Cursor="Hand" MouseLeftButtonUp="MoveToEmployerHomePage_Click" FontSize="20" Content="Your Jobs" HorizontalAlignment="Left" Margin="31,16,0,0" VerticalAlignment="Top"/>
         <Label Foreground="Blue" FontSize="20" Content="Add New Job" HorizontalAlignment="Left" Margin="137,16,0,0" VerticalAlignment="Top"/>
         <Label FontSize="20" Content="Role Name" HorizontalAlignment="Left" Margin="31,80,0,0" VerticalAlignment="Top"/>
         <Label FontSize="20" Content="Company Name" HorizontalAlignment="Left" Margin="387,80,0,0" VerticalAlignment="Top"/>
@@ -280,13 +289,14 @@
         <Label FontSize="20" Content="Contact Person" HorizontalAlignment="Left" Margin="268,569,0,0" VerticalAlignment="Top"/>
         <Label FontSize="20" Content="Location" HorizontalAlignment="Left" Margin="532,569,0,0" VerticalAlignment="Top"/>
         <Button Click="SaveButton_Click" Foreground="White" Background="#271515" Style="{DynamicResource RoundedButton}" Content="Save" HorizontalAlignment="Left" Margin="297,705,0,0" VerticalAlignment="Top" Height="44" Width="200"/>
-        <TextBox Name="RoleNameTextBox" FontSize="20" Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="34,132,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="280" Height="63"/>
-        <TextBox Name="CompanyNameTextBox" FontSize="20" Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="383,132,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="280" Height="63"/>
-        <TextBox AcceptsReturn="True" TextWrapping="Wrap" Name="DescriptionTextBox" FontSize="20" Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="34,393,0,0"  VerticalAlignment="Top" Width="730" Height="150"/>
-        <TextBox Name="SalaryTextBox" FontSize="20" Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="34,618,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200" Height="63"/>
-        <TextBox Name="ContactTextBox" FontSize="20" Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="262,618,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="240" Height="63"/>
-        <TextBox Name="LocationTextBox" FontSize="20" Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="532,618,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="240" Height="63"/>
+        <TextBox Name="RoleNameTextBox" FontSize="20" Padding="30,16" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="34,132,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="280" Height="63"/>
+        <TextBox Name="CompanyNameTextBox" FontSize="20" Padding="30,16" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="383,132,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="280" Height="63"/>
+        <TextBox AcceptsReturn="True" TextWrapping="Wrap" Name="DescriptionTextBox" FontSize="20" Padding="30,16"  Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="34,393,0,0"  VerticalAlignment="Top" Width="730" Height="150"/>
+        <TextBox Name="SalaryTextBox" FontSize="20" Padding="30,16"  Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="34,618,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200" Height="63"/>
+        <TextBox Name="ContactTextBox" FontSize="20" Padding="30,16" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="262,618,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="240" Height="63"/>
+        <TextBox Name="LocationTextBox" FontSize="20" Padding="30,16" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="532,618,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="240" Height="63"/>
         <ComboBox Name="JobTypeCombo" Style="{DynamicResource theComboBox}" HorizontalAlignment="Left" Margin="44,259,0,0" VerticalAlignment="Top" Width="260" Height="50"/>
         <ComboBox Name="ExperienceCombo" Style="{DynamicResource theComboBox}" HorizontalAlignment="Left" Margin="387,259,0,0" VerticalAlignment="Top" Width="260" Height="50"/>
     </Grid>
+    </ScrollViewer>
 </Window>

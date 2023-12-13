@@ -179,6 +179,12 @@ namespace HireHub.Employers.Views
 
 
         }
+        private void Logout_Click(object sender, EventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            this.Visibility = Visibility.Hidden;
+            mainWindow.Show();
+        }
 
 
 

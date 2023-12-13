@@ -221,5 +221,17 @@ namespace HireHub.JobSeekers.Views
             }
             return formErrorMessages;
         }
+        private void BackBtnToHomePage_Click(object sender, EventArgs e)
+        {
+            JobSeekerHomepage homePage = new JobSeekerHomepage(userEmailId);
+            this.Visibility = Visibility.Hidden;
+            homePage.Show();
+        }
+        private void LogOut_Click(object sender, EventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            this.Visibility = Visibility.Hidden;
+            mainWindow.Show();
+        }
     }
 }

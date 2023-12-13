@@ -191,5 +191,11 @@ namespace HireHub.Employers.Views
             //Edit Profile / Show
             MessageBox.Show("Edit Profile Call: Image");
         }
+        private void Logout_Click(object sender, EventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            this.Visibility = Visibility.Hidden;
+            mainWindow.Show();
+        }
     }
 }

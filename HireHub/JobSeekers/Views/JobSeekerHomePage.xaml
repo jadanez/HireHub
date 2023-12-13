@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HireHub.JobSeekers.Views"
         mc:Ignorable="d"
-        Title="JobSeekerHomepage" Height="450" Width="800"
+        Title="HireHub - Home Page"  Height="550" Width="800"
+        ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen" Icon="/HireHub.jpg">
     <Window.Resources>
 
@@ -107,8 +108,13 @@
 
     </Window.Resources>
     <Grid>
-
-        <Grid Height="auto" Margin="59,10,0,0" VerticalAlignment='Top' HorizontalAlignment="Center">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF00FFBA" Offset="0.312"/>
+                <GradientStop Color="#FF005495" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid Height="auto" Margin="78,10,0,0" VerticalAlignment='Top' HorizontalAlignment="Left">
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -116,38 +122,38 @@
                 </LinearGradientBrush>
             </Grid.Background>
             <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="470" />
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-                </Grid.ColumnDefinitions>
+                <ColumnDefinition Width="470" />
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="0" >
-                    <TextBox Name="SearchBox" VerticalAlignment="Top" HorizontalAlignment="Left"  Style="{DynamicResource RoundedTextBox}" Margin="10,10,0,10" Height="34" Text=" Type Here To Filter" Width="450" Background="#FFEEEEF2" AutomationProperties.HelpText="Type keyword to search job " Padding="8,8,8,0"/>
-                </StackPanel >
+            <StackPanel Grid.Column="0" >
+                <TextBox Name="SearchBox" VerticalAlignment="Top" HorizontalAlignment="Left"  Style="{DynamicResource RoundedTextBox}" Margin="10,10,0,10" Height="34" Text=" Type Here To Filter" Width="450" Background="#FFEEEEF2" AutomationProperties.HelpText="Type keyword to search job " Padding="8,8,8,0"/>
+            </StackPanel >
 
-                <StackPanel Grid.Column="1">
+            <StackPanel Grid.Column="1">
                 <Button Content="Search" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,10" Style="{DynamicResource RoundedButton}"  Height="34" Width="54" Cursor="Hand" Click="SearchBtn_Click" />
-                </StackPanel>
+            </StackPanel>
 
-                <StackPanel Grid.Column="2">
+            <StackPanel Grid.Column="2">
                 <Button Cursor="Hand" Click="JobSeekerEditProfileClick" Width="55">
                     <Button.Template>
                         <ControlTemplate>
                             <Ellipse x:Name="userProfileIcon" Margin="0,10,10,10" Stroke="Black"  Height="35"  Width="35" HorizontalAlignment="Right">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="\Common\Images\avatar.png" />
-                        </Ellipse.Fill>
-                    </Ellipse>
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="\Common\Images\avatar.png" />
+                                </Ellipse.Fill>
+                            </Ellipse>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
             </StackPanel>
 
-            </Grid>
+        </Grid>
 
 
         <Grid Margin="59,79,0,10" VerticalAlignment="Top" HorizontalAlignment="Center">
-            <ListView ItemsSource="{Binding jobDetails}" Height="auto" Width="670" d:ItemsSource="{d:SampleData ItemCount=5}" BorderThickness="1,1,1,1" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+            <ListView ItemsSource="{Binding jobDetails}" Height="auto" Width="670" d:ItemsSource="{d:SampleData ItemCount=5}" BorderThickness="1,1,1,1" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Margin="-16,0,16,0">
                 <ListView.ItemTemplate>
                     <ItemContainerTemplate>
                         <StackPanel Height="auto" Width="640" IsHitTestVisible="True" Visibility="Visible">
