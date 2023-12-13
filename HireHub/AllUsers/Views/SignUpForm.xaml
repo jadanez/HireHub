@@ -5,9 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HireHub.JobSeekers"
         mc:Ignorable="d"
-        Title="SignUpForm" Height="550" Width="800"
+        Title="HireHub - Sign Up" Height="550" Width="800"
+        ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen" Icon="/HireHub.jpg">
     <Window.Resources>
+        <Style x:Key="PasswordStyle" TargetType="{x:Type PasswordBox}">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="30" />
+                </Style>
+            </Style.Resources>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type PasswordBox}">
+                        <Border x:Name="border" CornerRadius="18" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF7EB4EA"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF569DE5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -47,6 +84,7 @@
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
                                 <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="border" Value="black"/>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
@@ -109,7 +147,12 @@
         </Style>
     </Window.Resources>
     <Grid>
-
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF00FFBA" Offset="0.312"/>
+                <GradientStop Color="#FF005495" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Label FontSize="40" Content="Sign-up Page" HorizontalAlignment="Left" Margin="54,28,0,0" VerticalAlignment="Top"/>
 
         <Separator HorizontalAlignment="Left" Margin="54,284,0,0" VerticalAlignment="Top" Height="4" RenderTransformOrigin="0.5,0.5" Width="664">
@@ -122,13 +165,16 @@
                 </TransformGroup>
             </Separator.RenderTransform>
         </Separator>
-        <Button Click="SignUpBtn_Click" Foreground="White" Background="#271515" Style="{DynamicResource RoundedButton}" Content="Sign-up" HorizontalAlignment="Left" Margin="608,459,0,0" VerticalAlignment="Top" Height="44" Width="110"/>
-        <TextBox Name="FirstNameTxtBox" FontSize="20" Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="54,115,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318" Height="63"/>
-        <TextBox Name="LastNameTxtBox" FontSize="20"  Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="400,115,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318" Height="63"/>
-        <TextBox Name="EmailTxtBox" FontSize="20" Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="54,204,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318" Height="63"/>
-        <TextBox Name="PhoneTxtBox" FontSize="20" Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="400,204,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318" Height="63"/>
-        <TextBox Name="PasswordTxtBox" FontSize="20" Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="54,321,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318" Height="63"/>
-        <TextBox Name="CPasswordTxtBox" FontSize="20" Padding="30,16" Background="#D9D9D9" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="400,321,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318" Height="63"/>
+        <Button Click="Back_BTN_Login" Foreground="Black" Background="Turquoise" Style="{DynamicResource RoundedButton}" Content="Move back to login" HorizontalAlignment="Left" Margin="608,459,0,0" VerticalAlignment="Top" Height="44" Width="130"/>
+        <Button Click="SignUpBtn_Click" Foreground="White" Background="#271515" Style="{DynamicResource RoundedButton}" Content="Sign-up" HorizontalAlignment="Left" Margin="473,459,0,0" VerticalAlignment="Top" Height="44" Width="110"/>
+        <TextBox Name="FirstNameTxtBox" FontSize="20" Padding="30,16"  Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="54,115,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318" Height="63"/>
+        <TextBox Name="LastNameTxtBox" FontSize="20"  Padding="30,16"  Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="400,115,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318" Height="63"/>
+        <TextBox Name="EmailTxtBox" FontSize="20" Padding="30,16" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="54,204,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318" Height="63"/>
+        <TextBox Name="PhoneTxtBox" FontSize="20" Padding="30,16" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="400,204,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318" Height="63"/>
+        <Label FontWeight="Bold" Foreground="White" FontSize="18" Content="Password" HorizontalAlignment="Left" Margin="60,291,0,0" VerticalAlignment="Top"/>
+        <Label FontWeight="Bold" Foreground="White" FontSize="18" Content="Confirm Password" HorizontalAlignment="Left" Margin="411,291,0,0" VerticalAlignment="Top"/>
+        <PasswordBox Name="PasswordTxtBox" FontSize="20" Padding="30,16"  Style="{DynamicResource PasswordStyle}" HorizontalAlignment="Left" Margin="54,331,0,0"  VerticalAlignment="Top" Width="318" Height="63"/>
+        <PasswordBox Name="CPasswordTxtBox" FontSize="20" Padding="30,16"  Style="{DynamicResource PasswordStyle}" HorizontalAlignment="Left" Margin="400,331,0,0" VerticalAlignment="Top" Width="318" Height="63"/>
 
         <TextBlock FontSize="20" IsHitTestVisible="False" Text="First Name" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="87,134,0,0" Foreground="#44484f">
             <TextBlock.Style>
@@ -172,30 +218,6 @@
                     <Setter Property="Visibility" Value="Collapsed"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Text, ElementName=PhoneTxtBox}" Value="">
-                            <Setter Property="Visibility" Value="Visible"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
-        <TextBlock Text="Password" FontSize="20" IsHitTestVisible="False" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="87,339,0,0" Foreground="#44484f">
-            <TextBlock.Style>
-                <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="Visibility" Value="Collapsed"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Text, ElementName=PasswordTxtBox}" Value="">
-                            <Setter Property="Visibility" Value="Visible"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
-        <TextBlock Text="Confirm Password" FontSize="20" IsHitTestVisible="False" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="431,339,0,0" Foreground="#44484f">
-            <TextBlock.Style>
-                <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="Visibility" Value="Collapsed"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Text, ElementName=CPasswordTxtBox}" Value="">
                             <Setter Property="Visibility" Value="Visible"/>
                         </DataTrigger>
                     </Style.Triggers>

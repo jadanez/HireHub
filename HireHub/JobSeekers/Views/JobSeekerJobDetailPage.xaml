@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HireHub.JobSeekers.Views"
         mc:Ignorable="d"
-        Title="JobSeekerJobDetailPage" Height="auto" Width="800">
+        ResizeMode="CanMinimize"
+        Title="HireHub - Job Details" Height="auto" Width="800">
     <Window.Resources>
 
         <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
@@ -107,6 +108,12 @@
     </Window.Resources>
     
     <Grid Margin="0,0,0,0" Height="auto">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF00FFBA" Offset="0.312"/>
+                <GradientStop Color="#FF005495" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid Height="auto" Margin="59,10,0,0" VerticalAlignment='Top' HorizontalAlignment="Center">
           
             <Grid.Background>
@@ -116,29 +123,32 @@
                 </LinearGradientBrush>
             </Grid.Background>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="470" />
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
-
+            <StackPanel Grid.Column="0">
+                <Button Click="MoveBackToHomePage_Click" Content="Back" HorizontalAlignment="Left" Margin="10,18,0,10" Style="{DynamicResource RoundedButton}"  Height="34" Width="54" Cursor="Hand"/>
+            </StackPanel>
          
             
-            <StackPanel Grid.Column="0" x:Name="SearchbarStackPanel">
+            <StackPanel Grid.Column="1" x:Name="SearchbarStackPanel">
                 <Border x:Name="SuccessMessageBorder" CornerRadius="5" HorizontalAlignment="Center" Background="DarkGreen" Visibility="Visible" Margin="30,0,0,10" Width="350">
                     <TextBlock x:Name="SuccessMessageTextBlock" HorizontalAlignment="Center" Visibility="Collapsed" Margin="30,0,0,10"/>
                 </Border>
                 <TextBox Name="SearchBox" VerticalAlignment="Top" HorizontalAlignment="Left"  Style="{DynamicResource RoundedTextBox}" Margin="10,10,0,10" Height="34" Text=" Type Here To Filter" Width="450" Background="#FFEEEEF2" AutomationProperties.HelpText="Type keyword to search job " Padding="8,8,8,0"/>
             </StackPanel >
 
-            <StackPanel Grid.Column="1">
-                <Button Content="Search" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,10" Style="{DynamicResource RoundedButton}"  Height="34" Width="54" Cursor="Hand" Click="SearchBtn_Click"/>
+            <StackPanel Grid.Column="2">
+                <Button Content="Search" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,18,0,10" Style="{DynamicResource RoundedButton}"  Height="34" Width="54" Cursor="Hand" Click="SearchBtn_Click"/>
             </StackPanel>
 
-            <StackPanel Grid.Column="2">
+            <StackPanel Grid.Column="3">
                 <Button Cursor="Hand" Click="JobSeekerEditProfileClick" Width="55">
                     <Button.Template>
                         <ControlTemplate>
-                            <Ellipse x:Name ="userProfileIcon" Margin="0,10,10,10" Stroke="Black"  Height="35"  Width="35" HorizontalAlignment="Right">
+                            <Ellipse x:Name ="userProfileIcon" Margin="0,18,10,10" Stroke="Black"  Height="35"  Width="35" HorizontalAlignment="Right">
                     <Ellipse.Fill>
                         <ImageBrush ImageSource="\Common\Images\avatar.png" />
                     </Ellipse.Fill>

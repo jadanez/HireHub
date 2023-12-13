@@ -5,10 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HireHub.Employers.Views"
         mc:Ignorable="d"
-        Title="HireHub - List of Applicants" Height="450" Width="600"
+        Title="HireHub - List of Applicants" Height="550" Width="800"
+        ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
         Icon="/Employers/Views/HireHub.jpg"
         ContentRendered="Window_ContentRendered">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1"
+                         StartPoint="0.5,0">
+            <GradientStop Color="#FF00FFBA"
+                    Offset="0" />
+            <GradientStop Color="#FF005495"
+                    Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Name="mainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -17,8 +27,9 @@
 
         <Button x:Name="YourJobs" Content="Your Jobs" HorizontalAlignment="Left" Margin="20,26,0,0" VerticalAlignment="Top" Click="Button_Click_1" Background="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.247,-0.484"/>
         <Button x:Name="AddJobs" Content="Add New Job" HorizontalAlignment="Left" Margin="96,26,0,0" VerticalAlignment="Top" Click="AddJobs_Click" Background="{x:Null}" BorderBrush="{x:Null}"/>
-        <Image x:Name="EmpProfilePhoto" HorizontalAlignment="Left" Height="49" Margin="512,11,0,0" VerticalAlignment="Top" Width="65" Source="/Employers/Views/profileLogo.png" MouseLeftButtonDown="Profile_Click"/>
-        <Button x:Name="EmpProfileName" Content="Your Name" HorizontalAlignment="Left" Margin="431,26,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Click="EmpProfileName_Click" Width="76"/>
+        <Image x:Name="EmpProfilePhoto" HorizontalAlignment="Left" Height="49" Margin="430,11,0,0" VerticalAlignment="Top" Width="65" Source="/Employers/Views/profileLogo.png" MouseLeftButtonDown="Profile_Click"/>
+        <Button Foreground="Red" x:Name="Logout" Content="Logout" HorizontalAlignment="Left" Margin="497,26,0,0" VerticalAlignment="Top" Click="Logout_Click" Background="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.247,-0.484"/>
+        <Button x:Name="EmpProfileName" Content="Your Name" HorizontalAlignment="Left" Margin="349,26,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Click="EmpProfileName_Click" Width="76"/>
 
 
         <!-- TextBlock for the header -->

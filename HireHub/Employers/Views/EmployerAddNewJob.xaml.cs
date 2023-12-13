@@ -174,5 +174,11 @@ namespace HireHub.Employers.Views
             }
             return formErrorMessage;
         }
+        private void MoveToEmployerHomePage_Click(object sender, EventArgs e)
+        {
+            EmployerHomePage employerHomePage = new EmployerHomePage(userEmailId, AccountFormConstants.Employer);
+            this.Visibility = Visibility.Hidden;
+            employerHomePage.Show();
+        }
     }
 }
