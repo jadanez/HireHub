@@ -22,8 +22,7 @@
             <RowDefinition Height="192*"/>
             <RowDefinition Height="25*"/>
         </Grid.RowDefinitions>
-        <Button Content="Signup" HorizontalAlignment="Left" Margin="256,322,0,0" VerticalAlignment="Top" Click="Button_Click" Height="35" Width="120" Grid.ColumnSpan="2"/>
-        <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="125,322,0,0" VerticalAlignment="Top" Height="35" Width="120" Click="Button_Click_1"/>
+        <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="125,322,0,0" VerticalAlignment="Top" Height="35" Width="120" Click="Login_Click"/>
         <TextBox x:Name="EmailAddressLogin" HorizontalAlignment="Left" Height="35" Margin="125,192,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Text="j@bwl.ca" Grid.ColumnSpan="2"/>
         <PasswordBox x:Name="PasswordLogin" HorizontalAlignment="Left" Height="35" Margin="125,251,0,0" VerticalAlignment="Top" Width="250" Password="John@sample1" Grid.ColumnSpan="2"/>
         <RadioButton x:Name="EmployerLogin" Content="Employer" HorizontalAlignment="Left" Margin="287,297,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
@@ -32,6 +31,9 @@
         <Label Content="Password" HorizontalAlignment="Center" Margin="0,227,0,0" VerticalAlignment="Top"/>
         <Label Content="Login as:" HorizontalAlignment="Left" Margin="125,291,0,0" VerticalAlignment="Top"/>
         <Image HorizontalAlignment="Left" Height="100" Margin="200,55,0,0" VerticalAlignment="Top" Width="100" Source="/HireHub.jpg"/>
+        <TextBlock x:Name="SignupText" HorizontalAlignment="Left" Margin="128,368,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="248">
+            Don't have an account? <Hyperlink Click="Signup_Click" Foreground="Black">Register Here</Hyperlink> 
+        </TextBlock>
 
     </Grid>
 </Window>

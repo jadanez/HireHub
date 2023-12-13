@@ -35,7 +35,7 @@ namespace HireHub
         }
 
         // If user clicks on sign up button
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Signup_Click(object sender, RoutedEventArgs e)
         {
             SignUpForm signUpForm = new SignUpForm();
             this.Visibility = Visibility.Hidden;
@@ -44,7 +44,7 @@ namespace HireHub
 
 
         // If user clicks on login button
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Login_Click(object sender, RoutedEventArgs e)
         {
 
             FormErrorMessages formErrorMessages = new FormErrorMessages();
@@ -111,8 +111,7 @@ namespace HireHub
 
                 if (validCredentials)
                 {
-                    //open homepage
-                    /* MessageBox.Show("Success");*/
+              
                     if (login.UserType == "Job Seeker")
                     {
                         JobSeekerHomepage jobSeekerHomepage = new JobSeekerHomepage(login.EmailAddress);
@@ -127,12 +126,7 @@ namespace HireHub
                         employerHomePage.Show();
                     }
 
-                    //reset values of inputs
-
-                    /* EmailAddressLogin.Text = null;
-                     PasswordLogin.Password = null;
-                     EmployerLogin.IsChecked = false;
-                     JobSeekerLogin.IsChecked = false;*/
+                   
 
 
 
