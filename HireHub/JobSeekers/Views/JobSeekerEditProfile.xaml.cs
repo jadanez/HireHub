@@ -1,6 +1,7 @@
 ﻿using HireHub.Common;
 using HireHub.Common.Models;
 using HireHub.Database.Queries;
+using HireHub.Employers.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -230,9 +231,24 @@ namespace HireHub.JobSeekers.Views
         }
         private void BackBtnToHomePage_Click(object sender, EventArgs e)
         {
-            JobSeekerHomepage homePage = new JobSeekerHomepage(userEmailId);
-            this.Visibility = Visibility.Hidden;
-            homePage.Show();
+            string userType = accountQueries.getUserType(userEmailId);
+
+            if(userType == "Job Seeker")
+            {
+                JobSeekerHomepage homePage = new JobSeekerHomepage(userEmailId);
+                this.Visibility = Visibility.Hidden;
+                homePage.Show();
+
+            }
+            else
+            {
+                EmployerHomePage employerHomePage = new EmployerHomePage(userEmailId, AccountFormConstants.Employer);
+                this.Visibility = Visibility.Hidden;
+                employerHomePage.Show();
+            }
+
+
+          
         }
         private void LogOut_Click(object sender, EventArgs e)
         {
