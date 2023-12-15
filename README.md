@@ -47,3 +47,6 @@ Job Seeker Account
    1. Enrollment: User can add their company information.
    2. Job Posting: User can post jobs by adding detailed information.
    3. Job Listing: User can click on the job description and check how many users apply for that job.
+  
+# Contributors
+1. John Cristopher Danez
