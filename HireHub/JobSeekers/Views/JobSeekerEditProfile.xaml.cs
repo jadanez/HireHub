@@ -106,7 +106,13 @@ namespace HireHub.JobSeekers.Views
                         bool isInserted = await profileQueries.InsertProfileDetails(profileModel);
                         if (isInserted)
                         {
+
                             MessageBox.Show(ProfileFormConstants.ProfileAdded, ProfileFormConstants.ProfileAdded, MessageBoxButton.OK, MessageBoxImage.Information);
+
+                            JobSeekerHomepage jobSeekerHomepage = new JobSeekerHomepage(userEmailId);
+                            this.Visibility = Visibility.Hidden;
+                            jobSeekerHomepage.Show();
+
                         }
                         else
                         {
