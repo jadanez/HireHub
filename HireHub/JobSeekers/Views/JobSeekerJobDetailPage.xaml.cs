@@ -205,5 +205,10 @@ namespace HireHub.JobSeekers.Views
             this.Visibility = Visibility.Hidden;
             mainWindow.Show();
         }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

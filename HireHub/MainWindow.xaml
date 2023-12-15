@@ -154,23 +154,23 @@
             </LinearGradientBrush>
         </Grid.Background>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="151*"/>
-            <ColumnDefinition Width="99*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="192*"/>
             <RowDefinition Height="25*"/>
         </Grid.RowDefinitions>
-        <Button Background="Black" Foreground="White" Style="{DynamicResource RoundedButton}" x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="281,368,0,0" VerticalAlignment="Top" Height="35" Width="250" Click="Login_Click" Grid.ColumnSpan="2"/>
-        <TextBox FontSize="16" Padding="10" Style="{DynamicResource RoundedTextBox}" x:Name="EmailAddressLogin" HorizontalAlignment="Left" Height="45" Margin="281,206,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Text="john.doe@company.com" Grid.ColumnSpan="2"/>
-        <PasswordBox FontSize="16" Padding="10" Style="{DynamicResource PasswordStyle}" x:Name="PasswordLogin" HorizontalAlignment="Left" Height="45" Margin="281,279,0,0" VerticalAlignment="Top" Width="250" Password="employerpass" Grid.ColumnSpan="2"/>
-        <RadioButton x:Name="EmployerLogin" Content="Employer" HorizontalAlignment="Left" Margin="443,343,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-        <RadioButton x:Name="JobSeekerLogin" Content="Job Seeker" HorizontalAlignment="Left" Margin="354,343,0,0" VerticalAlignment="Top"/>
-        <Label Content="Email Address" HorizontalAlignment="Left" Margin="276,180,0,0" VerticalAlignment="Top"/>
-        <Label Content="Password" HorizontalAlignment="Left" Margin="282,255,0,0" VerticalAlignment="Top"/>
-        <Label Content="Login as:" HorizontalAlignment="Left" Margin="281,337,0,0" VerticalAlignment="Top"/>
-        <Image HorizontalAlignment="Left" Height="100" Margin="356,69,0,0" VerticalAlignment="Top" Width="100" Source="/HireHub.jpg"/>
-        <TextBlock x:Name="SignupText" HorizontalAlignment="Left" Margin="301,410,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Visibility="Visible" Foreground="#FFFAFAFA" Grid.ColumnSpan="2">
+        <Button Background="Black" Foreground="White" Style="{DynamicResource RoundedButton}" x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="267,370,0,0" VerticalAlignment="Top" Height="35" Width="250" Click="Login_Click"/>
+        <TextBox FontSize="16" Padding="10" Style="{DynamicResource RoundedTextBox}" x:Name="EmailAddressLogin" HorizontalAlignment="Left" Height="45" Margin="267,208,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Text="alice.smith@example.com"/>
+        <PasswordBox FontSize="16" Padding="10" Style="{DynamicResource PasswordStyle}" x:Name="PasswordLogin" HorizontalAlignment="Left" Height="45" Margin="267,281,0,0" VerticalAlignment="Top" Width="250" Password="strongpassword"/>
+        <RadioButton x:Name="EmployerLogin" Content="Employer" HorizontalAlignment="Left" Margin="442,343,0,0" VerticalAlignment="Top" Height="15" Width="69"/>
+        <RadioButton x:Name="JobSeekerLogin" Content="Job Seeker" HorizontalAlignment="Left" Margin="342,343,0,0" VerticalAlignment="Top" Height="15" Width="76"/>
+        <Label Content="Email Address" HorizontalAlignment="Left" Margin="267,182,0,0" VerticalAlignment="Top" Height="26" Width="84"/>
+        <Label Content="Password" HorizontalAlignment="Left" Margin="267,258,0,0" VerticalAlignment="Top" Height="26" Width="60"/>
+        <Label Content="Login as:" HorizontalAlignment="Left" Margin="270,337,0,0" VerticalAlignment="Top" Height="26" Width="57"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="342,64,0,0" VerticalAlignment="Top" Width="100" Source="/HireHub.jpg"/>
+        <TextBlock x:Name="SignupText" HorizontalAlignment="Center" Margin="0,420,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Visibility="Visible" Foreground="#FFFAFAFA" Height="16">
             Don't have an account? <Hyperlink Click="Signup_Click" Foreground="White">Register Here</Hyperlink>
         </TextBlock>
 

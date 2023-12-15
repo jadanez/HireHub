@@ -269,34 +269,38 @@
         </Style>
     </Window.Resources>
     <ScrollViewer>
-    <Grid>
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FF00FFBA" Offset="0.312"/>
-                <GradientStop Color="#FF005495" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-        <Label Cursor="Hand" MouseLeftButtonUp="MoveToEmployerHomePage_Click" FontSize="20" Content="Your Jobs" HorizontalAlignment="Left" Margin="31,16,0,0" VerticalAlignment="Top"/>
-        <Label Foreground="Blue" FontSize="20" Content="Add New Job" HorizontalAlignment="Left" Margin="137,16,0,0" VerticalAlignment="Top"/>
-        <Label FontSize="20" Content="Role Name" HorizontalAlignment="Left" Margin="31,80,0,0" VerticalAlignment="Top"/>
-        <Label FontSize="20" Content="Company Name" HorizontalAlignment="Left" Margin="387,80,0,0" VerticalAlignment="Top"/>
-        <Label FontSize="20" Content="Job Type" HorizontalAlignment="Left" Margin="31,209,0,0" VerticalAlignment="Top"/>
-        <Label FontSize="20" Content="Experience Level" HorizontalAlignment="Left" Margin="390,209,0,0" VerticalAlignment="Top"/>
-        <Label FontSize="20" Content="Job Description and Requirements" HorizontalAlignment="Left" Margin="31,341,0,0" VerticalAlignment="Top"/>
-        <Label FontSize="20" Content="[NAME]" Name="UserFirstNameLbl" HorizontalAlignment="Left" Margin="593,24,0,0" VerticalAlignment="Top"/>
-        <Image Name="UserImage" HorizontalAlignment="Left" Height="58" Margin="696,16,0,0" VerticalAlignment="Top" Width="58"/>
-        <Label FontSize="20" Content="Salary (per hour)" HorizontalAlignment="Left" Margin="31,569,0,0" VerticalAlignment="Top"/>
-        <Label FontSize="20" Content="Contact Person" HorizontalAlignment="Left" Margin="268,569,0,0" VerticalAlignment="Top"/>
-        <Label FontSize="20" Content="Location" HorizontalAlignment="Left" Margin="532,569,0,0" VerticalAlignment="Top"/>
-        <Button Click="SaveButton_Click" Foreground="White" Background="#271515" Style="{DynamicResource RoundedButton}" Content="Save" HorizontalAlignment="Left" Margin="297,705,0,0" VerticalAlignment="Top" Height="44" Width="200"/>
-        <TextBox Name="RoleNameTextBox" FontSize="20" Padding="30,16" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="34,132,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="280" Height="63"/>
-        <TextBox Name="CompanyNameTextBox" FontSize="20" Padding="30,16" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="383,132,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="280" Height="63"/>
-        <TextBox AcceptsReturn="True" TextWrapping="Wrap" Name="DescriptionTextBox" FontSize="20" Padding="30,16"  Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="34,393,0,0"  VerticalAlignment="Top" Width="730" Height="150"/>
-        <TextBox Name="SalaryTextBox" FontSize="20" Padding="30,16"  Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="34,618,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200" Height="63"/>
-        <TextBox Name="ContactTextBox" FontSize="20" Padding="30,16" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="262,618,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="240" Height="63"/>
-        <TextBox Name="LocationTextBox" FontSize="20" Padding="30,16" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="532,618,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="240" Height="63"/>
-        <ComboBox Name="JobTypeCombo" Style="{DynamicResource theComboBox}" HorizontalAlignment="Left" Margin="44,259,0,0" VerticalAlignment="Top" Width="260" Height="50"/>
-        <ComboBox Name="ExperienceCombo" Style="{DynamicResource theComboBox}" HorizontalAlignment="Left" Margin="387,259,0,0" VerticalAlignment="Top" Width="260" Height="50"/>
-    </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="296*"/>
+                <RowDefinition Height="471*"/>
+            </Grid.RowDefinitions>
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF00FFBA" Offset="0.312"/>
+                    <GradientStop Color="#FF005495" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Label Cursor="Hand" MouseLeftButtonUp="MoveToEmployerHomePage_Click" FontSize="20" Content="Your Jobs" HorizontalAlignment="Left" Margin="51,34,0,0" VerticalAlignment="Top"/>
+            <Label Foreground="Blue" FontSize="20" Content="Add New Job" HorizontalAlignment="Left" Margin="174,34,0,0" VerticalAlignment="Top"/>
+            <Label FontSize="20" Content="Role Name" HorizontalAlignment="Left" Margin="101,112,0,0" VerticalAlignment="Top"/>
+            <Label FontSize="20" Content="Company Name" HorizontalAlignment="Left" Margin="409,112,0,0" VerticalAlignment="Top"/>
+            <Label FontSize="20" Content="Job Type" HorizontalAlignment="Left" Margin="101,205,0,0" VerticalAlignment="Top"/>
+            <Label FontSize="20" Content="Experience Level" HorizontalAlignment="Left" Margin="416,205,0,0" VerticalAlignment="Top"/>
+            <Label FontSize="20" Content="Job Description and Requirements" HorizontalAlignment="Left" Margin="102,323,0,0" VerticalAlignment="Top"/>
+            <Label FontSize="20" Content="[NAME]" Name="UserFirstNameLbl" HorizontalAlignment="Left" Margin="549,34,0,0" VerticalAlignment="Top"/>
+            <Image Name="UserImage" HorizontalAlignment="Left" Height="58" Margin="640,24,0,0" VerticalAlignment="Top" Width="58"/>
+            <Label FontSize="20" Content="Salary (annual)" HorizontalAlignment="Left" Margin="104,550,0,0" VerticalAlignment="Top"/>
+            <Label FontSize="20" Content="Contact Person" HorizontalAlignment="Left" Margin="308,550,0,0" VerticalAlignment="Top"/>
+            <Label FontSize="20" Content="Location" HorizontalAlignment="Left" Margin="506,550,0,0" VerticalAlignment="Top"/>
+            <Button Click="SaveButton_Click" Foreground="White" Background="#271515" Style="{DynamicResource RoundedButton}" Content="Save" HorizontalAlignment="Left" Margin="553,103,0,50" VerticalAlignment="Top" Height="44" Width="118" Grid.Row="1"/>
+            <TextBox Name="RoleNameTextBox" FontSize="20" Padding="30,16" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="102,149,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="267" Height="49"/>
+            <TextBox Name="CompanyNameTextBox" FontSize="20" Padding="30,16" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="409,149,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="262" Height="49"/>
+            <TextBox AcceptsReturn="True" TextWrapping="Wrap" Name="DescriptionTextBox" FontSize="20" Padding="30,16"  Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="104,365,0,0"  VerticalAlignment="Top" Width="567" Height="150"/>
+            <TextBox Name="SalaryTextBox" FontSize="20" Padding="30,16"  Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="104,586,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="169" Height="64" Grid.RowSpan="2"/>
+            <TextBox Name="ContactTextBox" FontSize="20" Padding="30,16" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Center" Margin="0,587,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="166" Height="63" Grid.RowSpan="2"/>
+            <TextBox Name="LocationTextBox" FontSize="20" Padding="30,16" Style="{DynamicResource RoundedTextBox}" HorizontalAlignment="Left" Margin="510,587,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="161" Height="63" Grid.RowSpan="2"/>
+            <ComboBox Name="JobTypeCombo" Style="{DynamicResource theComboBox}" HorizontalAlignment="Left" Margin="101,242,0,0" VerticalAlignment="Top" Width="268" Height="50"/>
+            <ComboBox Name="ExperienceCombo" Style="{DynamicResource theComboBox}" HorizontalAlignment="Left" Margin="409,242,0,0" VerticalAlignment="Top" Width="262" Height="50"/>
+        </Grid>
     </ScrollViewer>
 </Window>
