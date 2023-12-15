@@ -59,7 +59,7 @@ namespace HireHub.Employers.Views
         //add new jobs
         private void AddJobs_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Add jobs");
+           
             EmployerAddNewJob addNewJob = new EmployerAddNewJob(userId, empEmail, empFirstName);
             this.Visibility = Visibility.Hidden;
             addNewJob.Show();
