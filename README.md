@@ -35,15 +35,16 @@ To deploy the solution:
 # Features  
 
 1. All Users
-    1. Registration: User can register themselves as a Job seeker or recruiter.
-    2. Login: User can use their existing email and password to log in to their account.
-2. Job Seeker
+   1. Registration: User can register themselves as a Job seeker or recruiter.
+   2. Login: User can use their existing email and password to log in to their account.
+  
+3. Job Seeker
    1. Enrollment: User can add their personal information.
    2. Job Search: The user can add keywords to find any job.
    3. Search: Display all jobs, related to description, responsibilities and name
    4. Job Listing: The user can view a detailed information list with a job title, description, and ability to apply for a
    5. job role.
-3. Employer
+4. Employer
    1. Enrollment: User can add their company information.
    2. Job Posting: User can post jobs by adding detailed information.
    3. Job Listing: User can click on the job description and check how many users apply for that job.
