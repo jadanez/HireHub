@@ -51,13 +51,13 @@ namespace HireHub.Database.Queries
             {
                 string searchStringGeneric = $"SELECT * from Job";
                 cmd = new SqlCommand(searchStringGeneric, connection);
-                Debug.WriteLine("SQL SEARCH STRING IF:" + searchStringGeneric);
+                // Debug.WriteLine("SQL SEARCH STRING IF:" + searchStringGeneric);
             }
             else
             {
                 string selectQueryBasedOnSearchString = $"SELECT * from Job jobInstance where jobInstance.roleName LIKE '%{searchString}%'";
                 cmd = new SqlCommand(selectQueryBasedOnSearchString, connection);
-                Debug.WriteLine("SQL SEARCH STRING ELSE:" + selectQueryBasedOnSearchString);
+                // Debug.WriteLine("SQL SEARCH STRING ELSE:" + selectQueryBasedOnSearchString);
             }
 
             try
@@ -66,18 +66,18 @@ namespace HireHub.Database.Queries
                 cmd.CommandTimeout = 100000;
                 using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                 {
-                    Debug.WriteLine("Entered try, executed reader");
+                    // Debug.WriteLine("Entered try, executed reader");
                     if (reader == null)
                     {
-                        Debug.WriteLine("Reader is null");
+                        // Debug.WriteLine("Reader is null");
                         throw new Exception("Something went wrong while performing serach. Contact your administrator.");
                     }
                     else
                     {
-                        Debug.WriteLine("In else");
+                        // Debug.WriteLine("In else");
                         while (await reader.ReadAsync())
                         {
-                            Debug.WriteLine("Reading ++");
+                            // Debug.WriteLine("Reading ++");
                             JobDetailModel jobDetail = new JobDetailModel();
 
                             jobDetail.roleName = reader["roleName"].ToString();
@@ -93,14 +93,14 @@ namespace HireHub.Database.Queries
 
                             jobDetails.Add(jobDetail);
 
-                            Debug.WriteLine("Job Id " + jobDetail.jobId);
-                            Debug.WriteLine("Role Name " + jobDetail.roleName);
-                            Debug.WriteLine("Job Details " + jobDetail.jobDetails);
+                            // Debug.WriteLine("Job Id " + jobDetail.jobId);
+                            // Debug.WriteLine("Role Name " + jobDetail.roleName);
+                            // Debug.WriteLine("Job Details " + jobDetail.jobDetails);
                         }
                         reader.NextResult();
 
                         reader.Close();
-                        Debug.WriteLine("Reader close");
+                        // Debug.WriteLine("Reader close");
                         //JobSeekerHomepage.searchResult = jobDetails;
 
                        // int rowsAffected = (int)reader.RecordsAffected;
@@ -111,7 +111,7 @@ namespace HireHub.Database.Queries
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.ToString());
+                // Debug.WriteLine(ex.ToString());
                 return null;
             }
             finally
@@ -127,7 +127,7 @@ namespace HireHub.Database.Queries
 
             string selectQuery = $"SELECT TOP 1 * from Job jobInstance where jobInstance.jobId = {jobId}";
             SqlCommand cmd = new SqlCommand(selectQuery, connection);
-            Debug.WriteLine("SQL SEARCH STRING:" + selectQuery);
+            // Debug.WriteLine("SQL SEARCH STRING:" + selectQuery);
 
             try
             {
@@ -135,18 +135,18 @@ namespace HireHub.Database.Queries
                 cmd.CommandTimeout = 100000;
                 using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                 {
-                    Debug.WriteLine("Entered try, executed reader");
+                    // Debug.WriteLine("Entered try, executed reader");
                     if (reader == null)
                     {
-                        Debug.WriteLine("Reader is null");
+                        // Debug.WriteLine("Reader is null");
                         throw new Exception("Something went wrong while performing search. Contact your administrator.");
                     }
                     else
                     {
-                        Debug.WriteLine("In else");
+                        // Debug.WriteLine("In else");
                         while (await reader.ReadAsync())
                         {
-                            Debug.WriteLine("Reading ++");
+                            // Debug.WriteLine("Reading ++");
                             JobDetailModel jobDetail = new JobDetailModel();
 
                             jobDetail.roleName = reader["roleName"].ToString();
@@ -162,21 +162,21 @@ namespace HireHub.Database.Queries
 
                             jobDetails.Add(jobDetail);
 
-                            Debug.WriteLine("Job Id " + jobDetail.jobId);
-                            Debug.WriteLine("Role Name " + jobDetail.roleName);
-                            Debug.WriteLine("Job Details " + jobDetail.jobDetails);
+                            // Debug.WriteLine("Job Id " + jobDetail.jobId);
+                            // Debug.WriteLine("Role Name " + jobDetail.roleName);
+                            // Debug.WriteLine("Job Details " + jobDetail.jobDetails);
                         }
                         reader.NextResult();
 
                         reader.Close();
-                        Debug.WriteLine("Reader close");
+                        // Debug.WriteLine("Reader close");
                         return jobDetails;
                     }
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.ToString());
+                // Debug.WriteLine(ex.ToString());
                 return null;
             }
             finally
@@ -192,7 +192,7 @@ namespace HireHub.Database.Queries
             {
                 connection.Open();
                 string insertQuery = $"INSERT INTO Applicant (profileId, jobId, applicantStatus) VALUES ({profileId}, {specificJobId}, 'Pending')";
-                Debug.WriteLine("insert query: " + insertQuery);
+                // Debug.WriteLine("insert query: " + insertQuery);
 
                 SqlCommand cmd = new SqlCommand(insertQuery, connection);
 
@@ -212,7 +212,7 @@ namespace HireHub.Database.Queries
 
             string selectQuery = $"SELECT TOP 1 profileId from profile p where p.accountId = {accId}";
             SqlCommand cmd = new SqlCommand(selectQuery, connection);
-            Debug.WriteLine("SQL SEARCH STRING:" + selectQuery);
+            // Debug.WriteLine("SQL SEARCH STRING:" + selectQuery);
 
             try
             {
@@ -220,32 +220,32 @@ namespace HireHub.Database.Queries
                 cmd.CommandTimeout = 100000;
                 using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                 {
-                    Debug.WriteLine("Entered try, executed reader");
+                    // Debug.WriteLine("Entered try, executed reader");
                     if (reader == null)
                     {
-                        Debug.WriteLine("Reader is null");
+                        // Debug.WriteLine("Reader is null");
                         throw new Exception("Something went wrong while performing search. Contact your administrator.");
                     }
                     else
                     {
-                        Debug.WriteLine("In else");
+                        // Debug.WriteLine("In else");
                         int profileId = 0;
                         while (await reader.ReadAsync())
                         {
-                            Debug.WriteLine("Reading ++");
+                            // Debug.WriteLine("Reading ++");
                             profileId = Convert.ToInt32(reader["profileId"]);
 
-                            Debug.WriteLine("Profile Id " + profileId);
+                            // Debug.WriteLine("Profile Id " + profileId);
                         }
                         reader.Close();
-                        Debug.WriteLine("Reader close");
+                        // Debug.WriteLine("Reader close");
                         return profileId;
                     }
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.ToString());
+                // Debug.WriteLine(ex.ToString());
                 return -1;
             }
             finally

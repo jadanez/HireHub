@@ -46,7 +46,7 @@ namespace HireHub.JobSeekers.Views
             {
                 List<JobDetailModel> searchResult = await jobQuery.SearchJob_ByJobId(jobId);
 
-                Debug.WriteLine("Back to line 45: " + searchResult.Count);
+                // Debug.WriteLine("Back to line 45: " + searchResult.Count);
 
                 if (searchResult.Count == 0)
                 {
@@ -54,7 +54,7 @@ namespace HireHub.JobSeekers.Views
                 }
                 else
                 {
-                    Debug.WriteLine("roleName" + searchResult[0].roleName);
+                    // Debug.WriteLine("roleName" + searchResult[0].roleName);
 
                     this.specificJobPageModel.specificJobDetails = searchResult;
                     this.DataContext = null;

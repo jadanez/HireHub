@@ -38,12 +38,12 @@ namespace HireHub.JobSeekers.Views
         }
         private async void WindowOnLoad()
         {
-            Debug.WriteLine("Entered onLoad debug");
+            // Debug.WriteLine("Entered onLoad debug");
             Trace.WriteLine("Entered onLoad trace");
             JobQueries jobQuery = new JobQueries();
 
             List<JobDetailModel> onLoadSearchResult = await jobQuery.SearchJob_All_Or_ByRoleName("Generic");
-            Debug.WriteLine("Back to line 46: " + onLoadSearchResult.Count);
+            // Debug.WriteLine("Back to line 46: " + onLoadSearchResult.Count);
 
             if (onLoadSearchResult.Count == 0)
             {
@@ -51,10 +51,6 @@ namespace HireHub.JobSeekers.Views
             }
             else
             {
-                for (int i = 0; i < 4; i++)
-                {
-                    Debug.WriteLine("roleName" + i + onLoadSearchResult[i].roleName);
-                }
                 this.jobSeekerHomePageModel.jobDetails = onLoadSearchResult;
                 this.DataContext = null;
                 this.DataContext = this.jobSeekerHomePageModel;
@@ -73,7 +69,7 @@ namespace HireHub.JobSeekers.Views
             this.Visibility = Visibility.Hidden;
             jobSeekerJobDetailPage.Show();
 
-            Debug.WriteLine("Id of clicked btn is" + clickedButtonUId);
+            // Debug.WriteLine("Id of clicked btn is" + clickedButtonUId);
         }
         private FormErrorMessages GetSearchString()
         {
@@ -92,7 +88,7 @@ namespace HireHub.JobSeekers.Views
 
         internal async void SearchBtn_Click(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine("Entered Search Click");
+            // Debug.WriteLine("Entered Search Click");
             FormErrorMessages formErrorMessages = GetSearchString();
             if (formErrorMessages != null)
             {
@@ -103,13 +99,13 @@ namespace HireHub.JobSeekers.Views
                     {
                         searchString = SearchBox.Text
                     };
-                    Debug.WriteLine("Search String:" + jobSeekerHomePageModel.searchString);
+                    // Debug.WriteLine("Search String:" + jobSeekerHomePageModel.searchString);
                     try
                     {
                         //searchResult = jobQuery.SearchJob(jobSeekerHomePageModel.searchString);
                         List<JobDetailModel> onSearchSearchResult = await jobQuery.SearchJob_All_Or_ByRoleName(jobSeekerHomePageModel.searchString);
 
-                        Debug.WriteLine("Back to line 122: " + onSearchSearchResult.Count);
+                        // Debug.WriteLine("Back to line 122: " + onSearchSearchResult.Count);
                         if (onSearchSearchResult.Count == 0)
                         {
                             MessageBox.Show("No results matching the search! Please try another keyword", "No results matching the search! Please try another keyword", MessageBoxButton.OK, MessageBoxImage.Error);
