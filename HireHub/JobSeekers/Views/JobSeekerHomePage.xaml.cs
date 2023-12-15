@@ -141,6 +141,12 @@ namespace HireHub.JobSeekers.Views
             this.Visibility = Visibility.Hidden;
             employerHomePage.Show();
         }
+        public void LogoutBTN_Click(object sender, EventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            this.Visibility = Visibility.Hidden;
+            mainWindow.Show();
+        }
     }
 }
 

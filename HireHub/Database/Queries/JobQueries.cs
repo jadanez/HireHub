@@ -87,7 +87,7 @@ namespace HireHub.Database.Queries
                             jobDetail.experienceLevel = reader["experienceLevel"].ToString();
                             jobDetail.jobStatus = reader["jobStatus"].ToString();
                             jobDetail.hiringManager = reader["hiringManager"].ToString();
-                            jobDetail.salary = "$ " + Convert.ToDecimal(reader["salary"]) + " a year";
+                            jobDetail.salary = "$ " + Convert.ToDecimal(reader["salary"]) + " per hour";
                             jobDetail.companyName = reader["companyName"].ToString();
                             jobDetail.jobLocation = reader["jobLocation"].ToString();
 
@@ -156,7 +156,7 @@ namespace HireHub.Database.Queries
                             jobDetail.experienceLevel = reader["experienceLevel"].ToString();
                             jobDetail.jobStatus = reader["jobStatus"].ToString();
                             jobDetail.hiringManager = reader["hiringManager"].ToString();
-                            jobDetail.salary = "$ " + Convert.ToDecimal(reader["salary"]) + " a year";
+                            jobDetail.salary = "$ " + Convert.ToDecimal(reader["salary"]) + " per hour";
                             jobDetail.companyName = reader["companyName"].ToString();
                             jobDetail.jobLocation = reader["jobLocation"].ToString();
 

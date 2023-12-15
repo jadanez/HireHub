@@ -126,8 +126,9 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="70" />
                 <ColumnDefinition Width="400"/>
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="70"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
                 <Button Click="MoveBackToHomePage_Click" Content="Back" HorizontalAlignment="Left" Margin="10,18,0,10" Style="{DynamicResource RoundedButton}"  Height="34" Width="54" Cursor="Hand"/>
@@ -157,6 +158,9 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
+            </StackPanel>
+            <StackPanel Grid.Column="4">
+                <Button Content="Logout" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,18,0,10" Style="{DynamicResource RoundedButton}"  Height="34" Width="54" Cursor="Hand" Click="LogoutBTN_Click"/>
             </StackPanel>
 
         </Grid>
