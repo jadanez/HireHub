@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data;
+using HireHub.JobSeekers.Views;
 
 namespace HireHub.Employers.Views
 {
@@ -136,15 +137,20 @@ namespace HireHub.Employers.Views
         //Edit Profile
         private void EmpProfileName_Click(object sender, RoutedEventArgs e)
         {
-            //Edit Profile / Show
-            MessageBox.Show("Edit Profile Call");
+            
+            
+            JobSeekerEditProfile editProfile = new JobSeekerEditProfile(empEmail);
+            this.Visibility = Visibility.Hidden;
+            editProfile.Show();
         }
 
 
         private void Profile_Click(object sender, RoutedEventArgs e)
         {
             //Edit Profile / Show
-            MessageBox.Show("Edit Profile Call: Image");
+            JobSeekerEditProfile editProfile = new JobSeekerEditProfile(empEmail);
+            this.Visibility = Visibility.Hidden;
+            editProfile.Show();
         }
 
 

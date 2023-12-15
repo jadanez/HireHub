@@ -2,6 +2,7 @@
 using HireHub.Database.Queries;
 using HireHub.Employers.Models;
 using HireHub.JobSeekers;
+using HireHub.JobSeekers.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -148,7 +149,7 @@ namespace HireHub.Employers.Views
         //add new jobs
         private void AddJobs_Click(object sender, RoutedEventArgs e)
         {
-            /*MessageBox.Show(empFirstName +  userId.ToString() + empEmail);*/
+           
             EmployerAddNewJob addNewJob = new EmployerAddNewJob(userId,empEmail, empFirstName);
             this.Visibility = Visibility.Hidden;
             addNewJob.Show();
@@ -156,12 +157,7 @@ namespace HireHub.Employers.Views
 
 
 
-        //your jobs
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
-           /* MessageBox.Show("Your jobs!");*/
-        }
+       
 
 
         private void See_Applicants_Click(string btnName, string jobName)
@@ -181,15 +177,19 @@ namespace HireHub.Employers.Views
         //Edit Profile
         private void EmpProfileName_Click(object sender, RoutedEventArgs e)
         {
-            //Edit Profile / Show
-            MessageBox.Show("Edit Profile Call");
+            JobSeekerEditProfile editProfile = new JobSeekerEditProfile(empEmail);
+            this.Visibility = Visibility.Hidden;
+            editProfile.Show();
+
         }
 
 
         private void Profile_Click(object sender, RoutedEventArgs e)
         {
-            //Edit Profile / Show
-            MessageBox.Show("Edit Profile Call: Image");
+            JobSeekerEditProfile editProfile = new JobSeekerEditProfile(empEmail);
+            this.Visibility = Visibility.Hidden;
+            editProfile.Show();
+
         }
         private void Logout_Click(object sender, EventArgs e)
         {

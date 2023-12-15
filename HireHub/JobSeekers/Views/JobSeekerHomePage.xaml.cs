@@ -137,9 +137,9 @@ namespace HireHub.JobSeekers.Views
         }
         public void JobSeekerEditProfileClick(object sender, EventArgs e)
         {
-            JobSeekerEditProfile employerHomePage = new JobSeekerEditProfile(userEmailID);
+            JobSeekerEditProfile editProfile = new JobSeekerEditProfile(userEmailID);
             this.Visibility = Visibility.Hidden;
-            employerHomePage.Show();
+            editProfile.Show();
         }
         public void LogoutBTN_Click(object sender, EventArgs e)
         {
