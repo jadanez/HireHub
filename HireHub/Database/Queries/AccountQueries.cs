@@ -10,6 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Dynamic;
 using System.Linq;
 using System.Security.Principal;
+using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls.Primitives;
@@ -220,6 +221,34 @@ namespace HireHub.Database.Queries
             return accountDetails;
 
 
+        }
+
+
+
+        public string getUserType(string userEmail)
+        {
+            string userType = "";
+
+            string selectQuery = $"Select ac.userType FROM Account ac WHERE ac.email = '{userEmail}'";
+
+            connection.Open();
+            SqlCommand cmd = new SqlCommand(selectQuery, connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+
+                userType = reader.GetString(reader.GetOrdinal("userType"));
+               
+
+
+            }
+
+
+            connection.Close();
+
+
+            return userType;
         }
     }
 }
