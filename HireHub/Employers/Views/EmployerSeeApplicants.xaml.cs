@@ -156,10 +156,12 @@ namespace HireHub.Employers.Views
 
         private async void Window_ContentRendered(object sender, EventArgs e)
         {
+            EmpProfileName.Content = empFirstName;
 
 
             try
             {
+
                 ApplicantQueries getApplicants = new ApplicantQueries();
                 myApplicants = await getApplicants.GetApplicants(jobId);
 
