@@ -12,7 +12,7 @@ opportunities for job seekers and employers alike.
 
 # Getting Started
 The following software is required:
-1. Visual Studio Code
+1. Visual Studio
 2. Microsoft SQL Server Management Studio
 
 # Deployment
