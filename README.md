@@ -23,14 +23,13 @@ To deploy the solution:
 4. Change the connection string written in DbConnection.cs which is in Database folder
 5. Run the program with the following credentials:
 
-   Employer Account
-   Email: john.doe@company.com
-   Password: employerpass
+      Employer Account
+      Email: john.doe@company.com
+      Password: employerpass
 
-
-  Job Seeker Account
-  Email: alice.smith@example.com
-  Password: strongpassword
+      Job Seeker Account
+      Email: alice.smith@example.com
+      Password: strongpassword
   
 # Features  
 
