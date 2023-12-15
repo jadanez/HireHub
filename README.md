@@ -19,9 +19,10 @@ The following software is required:
 To deploy the solution:
 1. Download HireHub.sql locally.
 2. Run the sql file in Microsoft SQL Server Management Studio.
-3. Connect to database in Visual Studio
-4. Change the connection string written in DbConnection.cs which is in Database folder
-5. Run the program with the following credentials:
+3. Clone the repo in Visual Studio
+4. Connect to database in Visual Studio
+5. Change the connection string written in DbConnection.cs which is in Database folder
+6. Run the program with the following credentials:
 
 Employer Account
       Email: john.doe@company.com
