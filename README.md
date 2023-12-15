@@ -7,7 +7,7 @@ the right candidates and job seekers to find the right opportunities. With its e
 comprehensive functionalities, HireHub is set to revolutionize the job application process and create more
 opportunities for job seekers and employers alike.
 
-# Databse Design
+# Database Design
 ![image](https://github.com/jadanez/HireHub/assets/122333839/b74a4de3-8820-485f-b7a6-3b647ccd28d5)
 
 # Getting Started
