@@ -50,3 +50,4 @@ Job Seeker Account
   
 # Contributors
 1. John Cristopher Danez
+2. Harmandeep Singh Ghumman
