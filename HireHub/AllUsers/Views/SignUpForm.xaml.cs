@@ -1,5 +1,6 @@
 ﻿using HireHub.AllUsers.Models;
 using HireHub.Common;
+using HireHub.Common.Models;
 using HireHub.Database.Queries;
 using HireHub.Employers.Views;
 using HireHub.JobSeekers.Views;
@@ -71,9 +72,13 @@ namespace HireHub.JobSeekers
                                 }
                                 else
                                 {
-                                    JobSeekerHomepage jobSeekerHomepage = new JobSeekerHomepage(signUpModel.Email);
+                                    JobSeekerEditProfile editProfilePage = new JobSeekerEditProfile(signUpModel.Email);
                                     this.Visibility = Visibility.Hidden;
-                                    jobSeekerHomepage.Show();
+                                    editProfilePage.Show();
+
+                                    //JobSeekerHomepage jobSeekerHomepage = new JobSeekerHomepage(signUpModel.Email);
+                                    //this.Visibility = Visibility.Hidden;
+                                    //jobSeekerHomepage.Show();
                                 }
 
                             }
